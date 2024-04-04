@@ -1,5 +1,6 @@
 ﻿namespace FinalProject.Modules
 {
+    [Serializable]
     public class Circle : Figure
     {
         public Circle(int x, int y, int width, int height, Color outlineColor, Color fillColor)

@@ -1,5 +1,9 @@
-﻿namespace FinalProject.Modules
+﻿using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+
+namespace FinalProject.Modules
 {
+    [Serializable]
     public abstract class Figure
     {
         //private int _x;
@@ -35,6 +39,23 @@
         public double Area { get; set; }
         public Point Point { get; set; }
 
+        public Figure DeepClone()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                // Създаваме BinaryFormatter за сериализация
+                IFormatter formatter = new BinaryFormatter();
+
+                // Сериализираме текущия обект в memoryStream
+                formatter.Serialize(memoryStream, this);
+
+                // Позиционираме показателя на паметта в началото
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                // Десериализираме обекта от memoryStream и връщаме копие
+                return (Figure)formatter.Deserialize(memoryStream);
+            }
+        }
 
         public abstract double CalculasArea();
 

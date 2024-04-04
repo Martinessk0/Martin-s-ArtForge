@@ -37,6 +37,11 @@
             label1 = new Label();
             logo = new Button();
             pickColor = new Button();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            editToolStripMenuItem = new ToolStripMenuItem();
+            undoToolStripMenuItem = new ToolStripMenuItem();
+            redoToolStripMenuItem = new ToolStripMenuItem();
             leftPanelLayout = new Panel();
             btnRectangular = new Button();
             btnCircle = new Button();
@@ -46,6 +51,7 @@
             btnSquare = new Button();
             label2 = new Label();
             upperPanelLayout.SuspendLayout();
+            menuStrip1.SuspendLayout();
             leftPanelLayout.SuspendLayout();
             SuspendLayout();
             // 
@@ -71,6 +77,7 @@
             upperPanelLayout.Controls.Add(label1);
             upperPanelLayout.Controls.Add(logo);
             upperPanelLayout.Controls.Add(pickColor);
+            upperPanelLayout.Controls.Add(menuStrip1);
             resources.ApplyResources(upperPanelLayout, "upperPanelLayout");
             upperPanelLayout.Name = "upperPanelLayout";
             // 
@@ -119,6 +126,36 @@
             pickColor.Name = "pickColor";
             pickColor.UseVisualStyleBackColor = false;
             pickColor.Click += pickColor_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(32, 32);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem });
+            resources.ApplyResources(menuStrip1, "menuStrip1");
+            menuStrip1.Name = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
+            // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            resources.ApplyResources(editToolStripMenuItem, "editToolStripMenuItem");
+            // 
+            // undoToolStripMenuItem
+            // 
+            resources.ApplyResources(undoToolStripMenuItem, "undoToolStripMenuItem");
+            undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
+            // 
+            // redoToolStripMenuItem
+            // 
+            redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            resources.ApplyResources(redoToolStripMenuItem, "redoToolStripMenuItem");
+            redoToolStripMenuItem.Click += redoToolStripMenuItem_Click;
             // 
             // leftPanelLayout
             // 
@@ -225,10 +262,13 @@
             Controls.Add(leftPanelLayout);
             Controls.Add(upperPanelLayout);
             DoubleBuffered = true;
+            MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Load += MainForm_Load;
             upperPanelLayout.ResumeLayout(false);
             upperPanelLayout.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             leftPanelLayout.ResumeLayout(false);
             leftPanelLayout.PerformLayout();
             ResumeLayout(false);
@@ -251,5 +291,10 @@
         private Button btnMove;
         private Button btnCircle;
         private Label lblCurrColor;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem undoToolStripMenuItem;
+        private ToolStripMenuItem redoToolStripMenuItem;
     }
 }

@@ -5,8 +5,8 @@ namespace FinalProject
 {
     public partial class MainForm : Form
     {
-        
-
+        private readonly Stack<List<Figure>> _undoStack = new Stack<List<Figure>>();
+        private readonly Stack<List<Figure>> _redoStack = new Stack<List<Figure>>();
         private readonly List<Figure> _figures = new List<Figure>();
         private DrawingMode _currentDrawingMode = DrawingMode.None;
         private static Color _currColor = Color.Black;
@@ -20,7 +20,7 @@ namespace FinalProject
         private bool _isReadyForFilling = false;
         private Button lastSelectedButton;
 
-        private const double cmToInch = 2.54; 
+        private const double cmToInch = 2.54;
         private double dpiX, dpiY;
 
         public MainForm()
@@ -33,6 +33,10 @@ namespace FinalProject
         {
             dpiX = e.Graphics.DpiX;
             dpiY = e.Graphics.DpiY;
+            if (_undoStack.Count > 0) 
+                undoToolStripMenuItem.Enabled = true;
+            else
+                undoToolStripMenuItem.Enabled = false;
             foreach (Figure f in _figures)
             {
                 _drawingPen.Color = f.OutlineColor;
@@ -186,15 +190,20 @@ namespace FinalProject
         }
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            _selectedFigure = null;
+           // _selectedFigure = null;
 
             //Drawing
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left  && !_isMovable)
             {
                 _endPoint = e.Location;
                 DrawShape(_startPoint, _endPoint, e);
+                AddToUndoStack();
             }
-
+            //Movement Undo Feature
+            if (_isMovable && (_selectedFigure != null && e.Button == MouseButtons.Left))
+            {
+                AddToUndoStack();
+            }
             mainLayout.Invalidate();
             Refresh();
         }
@@ -237,6 +246,7 @@ namespace FinalProject
                 {
                     _selectedFigure = figure;
                     RemoveFigure(figure);
+                    AddToUndoStack();
                     Invalidate();
                     break;
                 }
@@ -324,16 +334,73 @@ namespace FinalProject
             return pixels / dpi * cmToInch;
         }
 
-
-
-        //private void buttonConvert_Click(object sender, EventArgs e)
+        //private void Undo()
         //{
-        //    int widthPixels = Width;
-        //    int heightPixels = Height;
+        //    if (_undoStack.Count > 0)
+        //    {
+        //        _undoStack.Pop();
+        //        var currentState = new List<Figure>(_figures);
+        //        _redoStack.Push(currentState);
 
-        //    double widthCM = PixelsToCM(widthPixels, dpiX);
-        //    double heightCM = PixelsToCM(heightPixels, dpiY);
+        //        _figures.Clear();
+        //        _figures.AddRange(_undoStack.Pop());
 
+        //        mainLayout.Invalidate();
+        //    }
         //}
+        private void Undo()
+        {
+            if (_undoStack.Count > 0)
+            {
+                _undoStack.Pop(); 
+                var currentState = new List<Figure>(_figures); 
+                _redoStack.Push(currentState); 
+
+                _figures.Clear();
+                if(_undoStack.Count > 0) _figures.AddRange(_undoStack.Peek());
+
+                mainLayout.Invalidate();
+            }
+        }
+
+
+
+        private void Redo()
+        {
+            if (_redoStack.Count > 0)
+            {
+                var currentState = new List<Figure>(_figures);
+                _undoStack.Push(currentState);
+
+                _figures.Clear();
+                _figures.AddRange(_redoStack.Pop());
+
+                mainLayout.Invalidate();
+            }
+        }
+
+        private void AddToUndoStack()
+        {
+            //var currentState = new List<Figure>(_figures);
+            //_undoStack.Push(currentState);
+            //_redoStack.Clear();
+            var currentState = new List<Figure>();
+            foreach (var figure in _figures)
+            {
+                currentState.Add(figure.DeepClone());
+            }
+            _undoStack.Push(currentState);
+            _redoStack.Clear();
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Redo();
+        }
     }
 }

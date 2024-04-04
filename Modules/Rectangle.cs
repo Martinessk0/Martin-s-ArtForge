@@ -2,6 +2,7 @@
 
 namespace FinalProject.Modules
 {
+    [Serializable]
     public class Rectangle : Figure
     {
         public Rectangle(int x, int y, int width, int height,Color outlineColor,Color fillColor) 
