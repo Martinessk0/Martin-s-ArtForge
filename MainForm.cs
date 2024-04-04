@@ -26,14 +26,13 @@ namespace FinalProject
         public MainForm()
         {
             InitializeComponent();
-
         }
 
         private void mainLayout_Paint(object sender, PaintEventArgs e)
         {
             dpiX = e.Graphics.DpiX;
             dpiY = e.Graphics.DpiY;
-            if (_undoStack.Count > 0) 
+            if (_undoStack.Count > 0)
                 undoToolStripMenuItem.Enabled = true;
             else
                 undoToolStripMenuItem.Enabled = false;
@@ -190,10 +189,10 @@ namespace FinalProject
         }
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)
         {
-           // _selectedFigure = null;
+            // _selectedFigure = null;
 
             //Drawing
-            if (e.Button == MouseButtons.Left  && !_isMovable)
+            if (e.Button == MouseButtons.Left && !_isMovable)
             {
                 _endPoint = e.Location;
                 DrawShape(_startPoint, _endPoint, e);
@@ -352,12 +351,12 @@ namespace FinalProject
         {
             if (_undoStack.Count > 0)
             {
-                _undoStack.Pop(); 
-                var currentState = new List<Figure>(_figures); 
-                _redoStack.Push(currentState); 
+                _undoStack.Pop();
+                var currentState = new List<Figure>(_figures);
+                _redoStack.Push(currentState);
 
                 _figures.Clear();
-                if(_undoStack.Count > 0) _figures.AddRange(_undoStack.Peek());
+                if (_undoStack.Count > 0) _figures.AddRange(_undoStack.Peek());
 
                 mainLayout.Invalidate();
             }
@@ -401,6 +400,18 @@ namespace FinalProject
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Redo();
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Z && e.Control)
+            {
+                Undo();
+            }
+            if (e.KeyCode == Keys.X && e.Control)
+            {
+                Redo();
+            }
         }
     }
 }

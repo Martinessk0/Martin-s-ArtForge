@@ -262,9 +262,11 @@
             Controls.Add(leftPanelLayout);
             Controls.Add(upperPanelLayout);
             DoubleBuffered = true;
+            KeyPreview = true;
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Load += MainForm_Load;
+            KeyDown += MainForm_KeyDown;
             upperPanelLayout.ResumeLayout(false);
             upperPanelLayout.PerformLayout();
             menuStrip1.ResumeLayout(false);
