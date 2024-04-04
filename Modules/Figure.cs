@@ -29,6 +29,9 @@
         public int Y { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+        public double HeightInCm { get; set; }
+        public double WidthInCm { get; set; }
+
         public double Area { get; set; }
         public Point Point { get; set; }
 

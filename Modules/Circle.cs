@@ -9,7 +9,8 @@
 
         public override double CalculasArea()
         {
-            return Math.PI * Math.Pow(Width / 2.0, 2);
+            Area =  Math.PI * (WidthInCm / 2.0) * (HeightInCm / 2.0);
+            return Area;
         }
 
         public override void Draw(Graphics graphics, Pen pen)

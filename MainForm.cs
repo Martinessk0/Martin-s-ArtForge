@@ -5,8 +5,7 @@ namespace FinalProject
 {
     public partial class MainForm : Form
     {
-        private readonly Stack<Action> _undoStack = new Stack<Action>();
-        private readonly Stack<Action> _redoStack = new Stack<Action>();
+        
 
         private readonly List<Figure> _figures = new List<Figure>();
         private DrawingMode _currentDrawingMode = DrawingMode.None;
@@ -21,6 +20,9 @@ namespace FinalProject
         private bool _isReadyForFilling = false;
         private Button lastSelectedButton;
 
+        private const double cmToInch = 2.54; 
+        private double dpiX, dpiY;
+
         public MainForm()
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace FinalProject
 
         private void mainLayout_Paint(object sender, PaintEventArgs e)
         {
+            dpiX = e.Graphics.DpiX;
+            dpiY = e.Graphics.DpiY;
             foreach (Figure f in _figures)
             {
                 _drawingPen.Color = f.OutlineColor;
@@ -133,6 +137,20 @@ namespace FinalProject
         }
         private void mainPanel_MouseDown(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Middle)
+            {
+                foreach (Figure figure in _figures)
+                {
+                    if (figure.Contains(e.Location))
+                    {
+                        figure.WidthInCm = PixelsToCM(figure.Width, dpiX);
+                        figure.HeightInCm = PixelsToCM(figure.Height, dpiY);
+                        figure.CalculasArea();
+                        MessageBox.Show($"The area of {figure.GetType().Name} is {Math.Round(figure.Area, 2)} cm2");
+
+                    }
+                }
+            }
             //Filling
             if (e.Button == MouseButtons.Right && _isReadyForFilling)
             {
@@ -301,6 +319,21 @@ namespace FinalProject
             }
         }
 
+        private double PixelsToCM(int pixels, double dpi)
+        {
+            return pixels / dpi * cmToInch;
+        }
 
+
+
+        //private void buttonConvert_Click(object sender, EventArgs e)
+        //{
+        //    int widthPixels = Width;
+        //    int heightPixels = Height;
+
+        //    double widthCM = PixelsToCM(widthPixels, dpiX);
+        //    double heightCM = PixelsToCM(heightPixels, dpiY);
+
+        //}
     }
 }

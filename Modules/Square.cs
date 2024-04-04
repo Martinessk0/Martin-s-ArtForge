@@ -9,7 +9,7 @@
 
         public override double CalculasArea()
         {
-            this.Area = Width * Height;
+            this.Area = WidthInCm * HeightInCm;
             return Area;
         }
 
