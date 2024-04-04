@@ -5,6 +5,9 @@ namespace FinalProject
 {
     public partial class MainForm : Form
     {
+        private readonly Stack<Action> _undoStack = new Stack<Action>();
+        private readonly Stack<Action> _redoStack = new Stack<Action>();
+
         private readonly List<Figure> _figures = new List<Figure>();
         private DrawingMode _currentDrawingMode = DrawingMode.None;
         private static Color _currColor = Color.Black;
@@ -221,6 +224,7 @@ namespace FinalProject
                 }
             }
         }
+
         private void GetRectangle(Point start, Point end)
         {
             int width = Math.Abs(start.X - end.X);
@@ -296,6 +300,7 @@ namespace FinalProject
                 lastSelectedButton = selectedButton;
             }
         }
+
 
     }
 }
