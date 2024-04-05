@@ -8,7 +8,6 @@ namespace FinalProject
         private readonly Stack<List<Figure>> _undoStack = new Stack<List<Figure>>();
         private readonly Stack<List<Figure>> _redoStack = new Stack<List<Figure>>();
         private readonly List<Figure> _figures = new List<Figure>();
-        private readonly List<Figure> historyListBox;
         private DrawingMode _currentDrawingMode = DrawingMode.None;
         private static Color _currColor = Color.Black;
         private Pen _drawingPen = new Pen(_currColor, 5);
@@ -20,7 +19,7 @@ namespace FinalProject
         private bool _isMovable = false;
         private bool _isReadyForFilling = false;
         private Button lastSelectedButton;
-
+        private ListBox _historyListBox = new ListBox();
         private const double cmToInch = 2.54;
         private double dpiX, dpiY;
 
@@ -136,6 +135,11 @@ namespace FinalProject
         {
             DocumentationForm documentation = new DocumentationForm();
             documentation.ShowDialog();
+        }
+        private void historyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HistoryForm history = new HistoryForm(_historyListBox);
+            history.ShowDialog();
         }
         private void AddFigure(Figure figure)
         {
@@ -391,8 +395,8 @@ namespace FinalProject
 
                 _figures.Clear();
                 if (_undoStack.Count > 0) _figures.AddRange(_undoStack.Peek());
-
                 mainLayout.Invalidate();
+                UpdateHistoryDisplay();
             }
         }
 
@@ -406,6 +410,7 @@ namespace FinalProject
                 _figures.Clear();
                 _figures.AddRange(_redoStack.Pop());
                 mainLayout.Invalidate();
+                UpdateHistoryDisplay();
             }
         }
 
@@ -423,15 +428,29 @@ namespace FinalProject
 
         private void UpdateHistoryDisplay()
         {
-            //historyListBox.Items.Clear();
-            //foreach (var action in _undoStack)
-            //{
-            //    historyListBox.Items.Add("Undo");
-            //}
-            //foreach (var action in _redoStack)
-            //{
-            //    historyListBox.Items.Add("Redo");
-            //}
+            //_historyListBox.Items.Clear();
+            foreach (var action in _undoStack)
+            {
+                foreach (var figure in action)
+                {
+                    _historyListBox.Text += "Undo";
+                    _historyListBox.Text += Environment.NewLine;
+                    _historyListBox.Text += figure.ToString();
+                    _historyListBox.Text += Environment.NewLine;
+                }
+            }
+            foreach (var action in _redoStack)
+            {
+                foreach (var figure in action)
+                {
+                    _historyListBox.Text += "Redo";
+                    _historyListBox.Text += Environment.NewLine;
+                    _historyListBox.Text += figure.ToString();
+                    _historyListBox.Text += Environment.NewLine;
+                }
+            }
+
         }
+
     }
 }

@@ -39,9 +39,14 @@
             pickColor = new Button();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
+            saveAsToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             undoToolStripMenuItem = new ToolStripMenuItem();
             redoToolStripMenuItem = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            macrosToolStripMenuItem = new ToolStripMenuItem();
+            documentationToolStripMenuItem = new ToolStripMenuItem();
             leftPanelLayout = new Panel();
             btnRectangular = new Button();
             btnEllipse = new Button();
@@ -50,11 +55,7 @@
             btnLine = new Button();
             btnSquare = new Button();
             label2 = new Label();
-            helpToolStripMenuItem = new ToolStripMenuItem();
-            macrosToolStripMenuItem = new ToolStripMenuItem();
-            documentationToolStripMenuItem = new ToolStripMenuItem();
-            saveAsToolStripMenuItem = new ToolStripMenuItem();
-            openToolStripMenuItem = new ToolStripMenuItem();
+            historyToolStripMenuItem = new ToolStripMenuItem();
             upperPanelLayout.SuspendLayout();
             menuStrip1.SuspendLayout();
             leftPanelLayout.SuspendLayout();
@@ -145,9 +146,19 @@
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
+            // saveAsToolStripMenuItem
+            // 
+            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
+            // 
+            // openToolStripMenuItem
+            // 
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
+            // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, historyToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             resources.ApplyResources(editToolStripMenuItem, "editToolStripMenuItem");
             // 
@@ -162,6 +173,23 @@
             redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             resources.ApplyResources(redoToolStripMenuItem, "redoToolStripMenuItem");
             redoToolStripMenuItem.Click += redoToolStripMenuItem_Click;
+            // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { macrosToolStripMenuItem, documentationToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // macrosToolStripMenuItem
+            // 
+            macrosToolStripMenuItem.Name = "macrosToolStripMenuItem";
+            resources.ApplyResources(macrosToolStripMenuItem, "macrosToolStripMenuItem");
+            // 
+            // documentationToolStripMenuItem
+            // 
+            documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
+            resources.ApplyResources(documentationToolStripMenuItem, "documentationToolStripMenuItem");
+            documentationToolStripMenuItem.Click += documentationToolStripMenuItem_Click;
             // 
             // leftPanelLayout
             // 
@@ -259,32 +287,11 @@
             resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
             // 
-            // helpToolStripMenuItem
+            // historyToolStripMenuItem
             // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { macrosToolStripMenuItem, documentationToolStripMenuItem });
-            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
-            // 
-            // macrosToolStripMenuItem
-            // 
-            macrosToolStripMenuItem.Name = "macrosToolStripMenuItem";
-            resources.ApplyResources(macrosToolStripMenuItem, "macrosToolStripMenuItem");
-            // 
-            // documentationToolStripMenuItem
-            // 
-            documentationToolStripMenuItem.Name = "documentationToolStripMenuItem";
-            resources.ApplyResources(documentationToolStripMenuItem, "documentationToolStripMenuItem");
-            documentationToolStripMenuItem.Click += documentationToolStripMenuItem_Click;
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
-            // 
-            // openToolStripMenuItem
-            // 
-            openToolStripMenuItem.Name = "openToolStripMenuItem";
-            resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
+            historyToolStripMenuItem.Name = "historyToolStripMenuItem";
+            resources.ApplyResources(historyToolStripMenuItem, "historyToolStripMenuItem");
+            historyToolStripMenuItem.Click += historyToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -336,5 +343,6 @@
         private ToolStripMenuItem documentationToolStripMenuItem;
         private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem historyToolStripMenuItem;
     }
 }

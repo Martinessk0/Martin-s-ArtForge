@@ -60,5 +60,10 @@ namespace FinalProject.Modules
         }
 
         public abstract void Fill(Graphics g, Brush brush);
+
+        public override string ToString()
+        {
+            return $"{this.GetType().Name} Outline:{OutlineColor} Fill:{FillColor} Width:{Width} Height:{Height}";
+        }
     }
 }
