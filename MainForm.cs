@@ -424,5 +424,10 @@ namespace FinalProject
                 Redo();
             }
         }
+
+        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
