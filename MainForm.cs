@@ -389,14 +389,15 @@ namespace FinalProject
         {
             if (_undoStack.Count > 0)
             {
-                _undoStack.Pop();
+                UpdateHistoryDisplayUndo(_undoStack.Pop());
+
                 var currentState = new List<Figure>(_figures);
                 _redoStack.Push(currentState);
 
                 _figures.Clear();
                 if (_undoStack.Count > 0) _figures.AddRange(_undoStack.Peek());
                 mainLayout.Invalidate();
-                UpdateHistoryDisplay();
+
             }
         }
 
@@ -404,15 +405,18 @@ namespace FinalProject
         {
             if (_redoStack.Count > 0)
             {
+                UpdateHistoryDisplayRedo(_redoStack.Peek());
                 var currentState = new List<Figure>(_figures);
                 _undoStack.Push(currentState);
 
                 _figures.Clear();
-                _figures.AddRange(_redoStack.Pop());
+                if (_redoStack.Count > 0) _figures.AddRange(_redoStack.Pop());
                 mainLayout.Invalidate();
-                UpdateHistoryDisplay();
+
             }
         }
+
+
 
         private void AddToUndoStack()
         {
@@ -423,34 +427,55 @@ namespace FinalProject
             }
             _undoStack.Push(currentState);
             _redoStack.Clear();
-            UpdateHistoryDisplay();
+            //UpdateHistoryDisplay();
         }
 
-        private void UpdateHistoryDisplay()
+        private void UpdateHistoryDisplayUndo(List<Figure> figures)
         {
-            //_historyListBox.Items.Clear();
-            foreach (var action in _undoStack)
-            {
-                foreach (var figure in action)
-                {
-                    _historyListBox.Text += "Undo";
-                    _historyListBox.Text += Environment.NewLine;
-                    _historyListBox.Text += figure.ToString();
-                    _historyListBox.Text += Environment.NewLine;
-                }
-            }
-            foreach (var action in _redoStack)
-            {
-                foreach (var figure in action)
-                {
-                    _historyListBox.Text += "Redo";
-                    _historyListBox.Text += Environment.NewLine;
-                    _historyListBox.Text += figure.ToString();
-                    _historyListBox.Text += Environment.NewLine;
-                }
-            }
+            figures.Reverse();
 
+            _historyListBox.Text += "Undo";
+            _historyListBox.Text += Environment.NewLine;
+            _historyListBox.Text += figures[0].ToString();
+            _historyListBox.Text += Environment.NewLine;
         }
+
+        private void UpdateHistoryDisplayRedo(List<Figure> figures)
+        {
+            figures.Reverse();
+
+            _historyListBox.Text += "Redo";
+            _historyListBox.Text += Environment.NewLine;
+            _historyListBox.Text += figures[0].ToString();
+            _historyListBox.Text += Environment.NewLine;
+        }
+
+
+        //private void UpdateHistoryDisplay()
+        //{
+        //    _historyListBox.Text = ""; 
+        //    foreach (var action in _undoStack)
+        //    {
+        //        foreach (var figure in action)
+        //        {
+        //            _historyListBox.Text += "Undo";
+        //            _historyListBox.Text += Environment.NewLine;
+        //            _historyListBox.Text += figure.ToString();
+        //            _historyListBox.Text += Environment.NewLine;
+        //        }
+        //    }
+
+        //    foreach (var action in _redoStack)
+        //    {
+        //        foreach (var figure in action)
+        //        {
+        //            _historyListBox.Text += "Redo";
+        //            _historyListBox.Text += Environment.NewLine;
+        //            _historyListBox.Text += figure.ToString();
+        //            _historyListBox.Text += Environment.NewLine;
+        //        }
+        //    }
+        //}
 
     }
 }
