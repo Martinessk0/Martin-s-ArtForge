@@ -8,6 +8,7 @@ namespace FinalProject
         private readonly Stack<List<Figure>> _undoStack = new Stack<List<Figure>>();
         private readonly Stack<List<Figure>> _redoStack = new Stack<List<Figure>>();
         private readonly List<Figure> _figures = new List<Figure>();
+        private readonly List<Figure> historyListBox;
         private DrawingMode _currentDrawingMode = DrawingMode.None;
         private static Color _currColor = Color.Black;
         private Pen _drawingPen = new Pen(_currColor, 5);
@@ -28,6 +29,9 @@ namespace FinalProject
             InitializeComponent();
         }
 
+
+
+        //Paint Event
         private void mainLayout_Paint(object sender, PaintEventArgs e)
         {
             dpiX = e.Graphics.DpiX;
@@ -56,6 +60,8 @@ namespace FinalProject
         }
 
 
+
+        //Load
         private void MainForm_Load(object sender, EventArgs e)
         {
             lblCurrColor.BackColor = _currColor;
@@ -66,6 +72,10 @@ namespace FinalProject
             | BindingFlags.Instance | BindingFlags.NonPublic, null,
             mainLayout, new object[] { true });
         }
+
+
+
+        //Buttons
         private void btnRectangular_Click(object sender, EventArgs e)
         {
             SelectButton(btnRectangular);
@@ -114,6 +124,19 @@ namespace FinalProject
             _isMovable = false;
             _currentDrawingMode = DrawingMode.Fill;
         }
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Redo();
+        }
+        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DocumentationForm documentation = new DocumentationForm();
+            documentation.ShowDialog();
+        }
         private void AddFigure(Figure figure)
         {
             _figures.Add(figure);
@@ -134,6 +157,21 @@ namespace FinalProject
             }
         }
 
+
+
+        //Events
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Z && e.Control)
+            {
+                Undo();
+            }
+            if (e.KeyCode == Keys.X && e.Control)
+            {
+                Redo();
+            }
+        }
+
         private void mainLayout_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isMovable && (_selectedFigure != null && e.Button == MouseButtons.Left))
@@ -147,7 +185,6 @@ namespace FinalProject
         }
         private void mainPanel_MouseDown(object sender, MouseEventArgs e)
         {
-
             //Finding Area
             if (e.Button == MouseButtons.Middle)
             {
@@ -199,7 +236,6 @@ namespace FinalProject
         }
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)
         {
-
             //Drawing
             if (e.Button == MouseButtons.Left && !_isMovable)
             {
@@ -219,6 +255,8 @@ namespace FinalProject
         }
 
 
+
+        //Methods
         private void DrawShape(Point start, Point end, MouseEventArgs e)
         {
             switch (_currentDrawingMode)
@@ -246,7 +284,6 @@ namespace FinalProject
                     break;
             }
         }
-
 
         private void EraseFigure(MouseEventArgs e)
         {
@@ -344,20 +381,6 @@ namespace FinalProject
             return pixels / dpi * cmToInch;
         }
 
-        //private void Undo()
-        //{
-        //    if (_undoStack.Count > 0)
-        //    {
-        //        _undoStack.Pop();
-        //        var currentState = new List<Figure>(_figures);
-        //        _redoStack.Push(currentState);
-
-        //        _figures.Clear();
-        //        _figures.AddRange(_undoStack.Pop());
-
-        //        mainLayout.Invalidate();
-        //    }
-        //}
         private void Undo()
         {
             if (_undoStack.Count > 0)
@@ -373,8 +396,6 @@ namespace FinalProject
             }
         }
 
-
-
         private void Redo()
         {
             if (_redoStack.Count > 0)
@@ -384,16 +405,12 @@ namespace FinalProject
 
                 _figures.Clear();
                 _figures.AddRange(_redoStack.Pop());
-
                 mainLayout.Invalidate();
             }
         }
 
         private void AddToUndoStack()
         {
-            //var currentState = new List<Figure>(_figures);
-            //_undoStack.Push(currentState);
-            //_redoStack.Clear();
             var currentState = new List<Figure>();
             foreach (var figure in _figures)
             {
@@ -401,33 +418,20 @@ namespace FinalProject
             }
             _undoStack.Push(currentState);
             _redoStack.Clear();
+            UpdateHistoryDisplay();
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UpdateHistoryDisplay()
         {
-            Undo();
-        }
-
-        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Redo();
-        }
-
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Z && e.Control)
-            {
-                Undo();
-            }
-            if (e.KeyCode == Keys.X && e.Control)
-            {
-                Redo();
-            }
-        }
-
-        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            //historyListBox.Items.Clear();
+            //foreach (var action in _undoStack)
+            //{
+            //    historyListBox.Items.Add("Undo");
+            //}
+            //foreach (var action in _redoStack)
+            //{
+            //    historyListBox.Items.Add("Redo");
+            //}
         }
     }
 }
