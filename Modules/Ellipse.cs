@@ -1,9 +1,9 @@
 ﻿namespace FinalProject.Modules
 {
     [Serializable]
-    public class Circle : Figure
+    public class Ellipse : Figure
     {
-        public Circle(int x, int y, int width, int height, Color outlineColor, Color fillColor)
+        public Ellipse(int x, int y, int width, int height, Color outlineColor, Color fillColor)
             : base(x, y, width, height, outlineColor, fillColor)
         {
         }

@@ -148,7 +148,7 @@
     <value>132, 17</value>
   </metadata>
   <data name="lblCurrColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2019, 62</value>
+    <value>1999, 62</value>
   </data>
   <data name="lblCurrColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 151</value>
@@ -314,16 +314,16 @@
     <value>False</value>
   </data>
   <data name="undoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 44</value>
+    <value>314, 44</value>
   </data>
   <data name="undoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Undo</value>
+    <value>Undo  (Ctrl + Z)</value>
   </data>
   <data name="redoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 44</value>
+    <value>314, 44</value>
   </data>
   <data name="redoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Redo</value>
+    <value>Redo  (Ctrl + X)</value>
   </data>
   <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 36</value>
@@ -412,37 +412,37 @@
   <data name="&gt;&gt;btnRectangular.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnCircle.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+  <data name="btnEllipse.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="btnCircle.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="btnEllipse.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="btnCircle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnEllipse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnCircle.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnEllipse.Location" type="System.Drawing.Point, System.Drawing">
     <value>35, 676</value>
   </data>
-  <data name="btnCircle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="btnEllipse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
   </data>
-  <data name="btnCircle.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnEllipse.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 126</value>
   </data>
-  <data name="btnCircle.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnEllipse.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;btnCircle.Name" xml:space="preserve">
-    <value>btnCircle</value>
+  <data name="&gt;&gt;btnEllipse.Name" xml:space="preserve">
+    <value>btnEllipse</value>
   </data>
-  <data name="&gt;&gt;btnCircle.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnEllipse.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnCircle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnEllipse.Parent" xml:space="preserve">
     <value>leftPanelLayout</value>
   </data>
-  <data name="&gt;&gt;btnCircle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnEllipse.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btnMove.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">

@@ -44,7 +44,7 @@
             redoToolStripMenuItem = new ToolStripMenuItem();
             leftPanelLayout = new Panel();
             btnRectangular = new Button();
-            btnCircle = new Button();
+            btnEllipse = new Button();
             btnMove = new Button();
             btnEraser = new Button();
             btnLine = new Button();
@@ -161,7 +161,7 @@
             // 
             leftPanelLayout.BackColor = Color.SpringGreen;
             leftPanelLayout.Controls.Add(btnRectangular);
-            leftPanelLayout.Controls.Add(btnCircle);
+            leftPanelLayout.Controls.Add(btnEllipse);
             leftPanelLayout.Controls.Add(btnMove);
             leftPanelLayout.Controls.Add(btnEraser);
             leftPanelLayout.Controls.Add(btnLine);
@@ -183,18 +183,18 @@
             btnRectangular.UseVisualStyleBackColor = false;
             btnRectangular.Click += btnRectangular_Click;
             // 
-            // btnCircle
+            // btnEllipse
             // 
-            btnCircle.BackColor = Color.Transparent;
-            btnCircle.BackgroundImage = Properties.Resources.circle;
-            resources.ApplyResources(btnCircle, "btnCircle");
-            btnCircle.FlatAppearance.BorderColor = Color.Green;
-            btnCircle.FlatAppearance.BorderSize = 0;
-            btnCircle.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 192, 0);
-            btnCircle.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 192, 0);
-            btnCircle.Name = "btnCircle";
-            btnCircle.UseVisualStyleBackColor = false;
-            btnCircle.Click += btnCircle_Click;
+            btnEllipse.BackColor = Color.Transparent;
+            btnEllipse.BackgroundImage = Properties.Resources.circle;
+            resources.ApplyResources(btnEllipse, "btnEllipse");
+            btnEllipse.FlatAppearance.BorderColor = Color.Green;
+            btnEllipse.FlatAppearance.BorderSize = 0;
+            btnEllipse.FlatAppearance.MouseDownBackColor = Color.FromArgb(0, 192, 0);
+            btnEllipse.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 192, 0);
+            btnEllipse.Name = "btnEllipse";
+            btnEllipse.UseVisualStyleBackColor = false;
+            btnEllipse.Click += btnEllipse_Click;
             // 
             // btnMove
             // 
@@ -291,7 +291,7 @@
         private Button btnEraser;
         private Button btnFill;
         private Button btnMove;
-        private Button btnCircle;
+        private Button btnEllipse;
         private Label lblCurrColor;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;

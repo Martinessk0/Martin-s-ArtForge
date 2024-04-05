@@ -9,6 +9,6 @@
         Eraser = 4,
         Fill = 5,
         Move = 6,
-        Circle = 7,
+        Ellipse = 7,
     }
 }

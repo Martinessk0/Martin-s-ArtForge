@@ -1,10 +1,8 @@
 ﻿namespace FinalProject.Modules
 {
+    [Serializable]
     public class Line : Figure
     {
-        //private Point _start;
-        //private Point _end;
-
         public Line(Point start, Point end, int x, int y, int width, int height, Color outlineColor, Color fillColor)
             : base(x, y, width, height, outlineColor, fillColor)
         {

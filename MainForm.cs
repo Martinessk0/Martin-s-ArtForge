@@ -32,10 +32,17 @@ namespace FinalProject
         {
             dpiX = e.Graphics.DpiX;
             dpiY = e.Graphics.DpiY;
+
             if (_undoStack.Count > 0)
                 undoToolStripMenuItem.Enabled = true;
             else
                 undoToolStripMenuItem.Enabled = false;
+
+            if (_redoStack.Count > 0)
+                redoToolStripMenuItem.Enabled = true;
+            else
+                redoToolStripMenuItem.Enabled = false;
+
             foreach (Figure f in _figures)
             {
                 _drawingPen.Color = f.OutlineColor;
@@ -66,12 +73,12 @@ namespace FinalProject
             _isMovable = false;
             _currentDrawingMode = DrawingMode.Rectangle;
         }
-        private void btnCircle_Click(object sender, EventArgs e)
+        private void btnEllipse_Click(object sender, EventArgs e)
         {
-            SelectButton(btnCircle);
+            SelectButton(btnEllipse);
             _isReadyForFilling = false;
             _isMovable = false;
-            _currentDrawingMode = DrawingMode.Circle;
+            _currentDrawingMode = DrawingMode.Ellipse;
         }
         private void btnSquare_Click(object sender, EventArgs e)
         {
@@ -140,12 +147,15 @@ namespace FinalProject
         }
         private void mainPanel_MouseDown(object sender, MouseEventArgs e)
         {
+
+            //Finding Area
             if (e.Button == MouseButtons.Middle)
             {
                 foreach (Figure figure in _figures)
                 {
                     if (figure.Contains(e.Location))
                     {
+                        //Converter Px in Cm
                         figure.WidthInCm = PixelsToCM(figure.Width, dpiX);
                         figure.HeightInCm = PixelsToCM(figure.Height, dpiY);
                         figure.CalculasArea();
@@ -164,7 +174,7 @@ namespace FinalProject
                         figure.FillColor = _currColor;
                         figure.IsFill = true;
                         Invalidate();
-
+                        AddToUndoStack();
                     }
                 }
             }
@@ -189,7 +199,6 @@ namespace FinalProject
         }
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            // _selectedFigure = null;
 
             //Drawing
             if (e.Button == MouseButtons.Left && !_isMovable)
@@ -203,6 +212,8 @@ namespace FinalProject
             {
                 AddToUndoStack();
             }
+
+            _selectedFigure = null;
             mainLayout.Invalidate();
             Refresh();
         }
@@ -230,8 +241,8 @@ namespace FinalProject
                 case DrawingMode.Fill:
                     _isReadyForFilling = true;
                     break;
-                case DrawingMode.Circle:
-                    GetCircle(start, end);
+                case DrawingMode.Ellipse:
+                    GetEllipse(start, end);
                     break;
             }
         }
@@ -292,7 +303,7 @@ namespace FinalProject
             return model;
         }
 
-        private void GetCircle(Point start, Point end)
+        private void GetEllipse(Point start, Point end)
         {
             int width = Math.Abs(start.X - end.X);
             int height = Math.Abs(start.Y - end.Y);
@@ -302,7 +313,7 @@ namespace FinalProject
             if (!_isMovable)
             {
                 var model =
-                    new Circle(
+                    new Ellipse(
                         x,
                         y,
                         width,
