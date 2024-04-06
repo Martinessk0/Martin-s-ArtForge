@@ -34,7 +34,6 @@
             // 
             // historyListBox
             // 
-            historyListBox.Enabled = false;
             historyListBox.Location = new Point(107, 44);
             historyListBox.Multiline = true;
             historyListBox.Name = "historyListBox";

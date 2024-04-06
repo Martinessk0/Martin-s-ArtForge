@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             btnOK = new Button();
-            lblDrawing = new Label();
             lblFilling = new Label();
             lblArea = new Label();
             lblUndo = new Label();
@@ -39,6 +38,7 @@
             lblMoveDesc = new Label();
             lblUndoDesc = new Label();
             lblAreaDesc = new Label();
+            lblDrawing = new Label();
             SuspendLayout();
             // 
             // btnOK
@@ -50,15 +50,6 @@
             btnOK.Text = "OK";
             btnOK.UseVisualStyleBackColor = true;
             btnOK.Click += btnOK_Click;
-            // 
-            // lblDrawing
-            // 
-            lblDrawing.Font = new Font("Verdana", 13.875F, FontStyle.Regular, GraphicsUnit.Point);
-            lblDrawing.Location = new Point(53, 60);
-            lblDrawing.Name = "lblDrawing";
-            lblDrawing.Size = new Size(197, 57);
-            lblDrawing.TabIndex = 1;
-            lblDrawing.Text = "Drawing: ";
             // 
             // lblFilling
             // 
@@ -141,6 +132,15 @@
             lblAreaDesc.TabIndex = 10;
             lblAreaDesc.Text = "Click the figure with mouse middle button";
             // 
+            // lblDrawing
+            // 
+            lblDrawing.Font = new Font("Verdana", 13.875F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDrawing.Location = new Point(53, 60);
+            lblDrawing.Name = "lblDrawing";
+            lblDrawing.Size = new Size(197, 57);
+            lblDrawing.TabIndex = 1;
+            lblDrawing.Text = "Drawing: ";
+            // 
             // DocumentationForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -166,7 +166,6 @@
         #endregion
 
         private Button btnOK;
-        private Label lblDrawing;
         private Label lblFilling;
         private Label lblArea;
         private Label lblUndo;
@@ -176,5 +175,6 @@
         private Label lblMoveDesc;
         private Label lblUndoDesc;
         private Label lblAreaDesc;
+        private Label lblDrawing;
     }
 }
