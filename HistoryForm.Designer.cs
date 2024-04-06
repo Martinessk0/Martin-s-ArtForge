@@ -34,16 +34,17 @@
             // 
             // historyListBox
             // 
+            historyListBox.Enabled = false;
             historyListBox.Location = new Point(107, 44);
             historyListBox.Multiline = true;
             historyListBox.Name = "historyListBox";
             historyListBox.ScrollBars = ScrollBars.Vertical;
-            historyListBox.Size = new Size(874, 790);
+            historyListBox.Size = new Size(964, 790);
             historyListBox.TabIndex = 0;
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(425, 888);
+            btnOK.Location = new Point(461, 886);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(239, 94);
             btnOK.TabIndex = 1;
@@ -56,7 +57,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SpringGreen;
-            ClientSize = new Size(1128, 1017);
+            ClientSize = new Size(1188, 1017);
             Controls.Add(btnOK);
             Controls.Add(historyListBox);
             Name = "HistoryForm";

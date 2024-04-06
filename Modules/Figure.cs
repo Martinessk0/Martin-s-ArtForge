@@ -33,17 +33,26 @@ namespace FinalProject.Modules
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                // Създаваме BinaryFormatter за сериализация
+                // Create a BinaryFormatter for serialization
                 IFormatter formatter = new BinaryFormatter();
 
-                // Сериализираме текущия обект в memoryStream
+                // Serialize the current object into memoryStream
                 formatter.Serialize(memoryStream, this);
 
-                // Позиционираме показателя на паметта в началото
+                // Reset the memoryStream position to the beginning
                 memoryStream.Seek(0, SeekOrigin.Begin);
 
-                // Десериализираме обекта от memoryStream и връщаме копие
-                return (Figure)formatter.Deserialize(memoryStream);
+                // Deserialize the object from memoryStream
+                Figure clonedFigure = (Figure)formatter.Deserialize(memoryStream);
+
+                // Perform a deep copy by creating new instances of referenced objects
+                // Assuming Figure class has properties that need to be deep copied, do it here
+
+                // For example:
+                // clonedFigure.SomeProperty = new SomePropertyType(this.SomeProperty);
+
+                // Return the cloned object
+                return clonedFigure;
             }
         }
 
@@ -63,7 +72,8 @@ namespace FinalProject.Modules
 
         public override string ToString()
         {
-            return $"{this.GetType().Name} Outline:{OutlineColor} Fill:{FillColor} Width:{Width} Height:{Height}";
+            return $"{this.GetType().Name} -> Color: Outline{OutlineColor} Fill{FillColor} Location:{X} {Y}";
         }
     }
 }
+ 

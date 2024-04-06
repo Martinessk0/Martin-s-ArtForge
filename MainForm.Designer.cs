@@ -44,6 +44,7 @@
             editToolStripMenuItem = new ToolStripMenuItem();
             undoToolStripMenuItem = new ToolStripMenuItem();
             redoToolStripMenuItem = new ToolStripMenuItem();
+            historyToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             macrosToolStripMenuItem = new ToolStripMenuItem();
             documentationToolStripMenuItem = new ToolStripMenuItem();
@@ -55,7 +56,6 @@
             btnLine = new Button();
             btnSquare = new Button();
             label2 = new Label();
-            historyToolStripMenuItem = new ToolStripMenuItem();
             upperPanelLayout.SuspendLayout();
             menuStrip1.SuspendLayout();
             leftPanelLayout.SuspendLayout();
@@ -174,6 +174,12 @@
             resources.ApplyResources(redoToolStripMenuItem, "redoToolStripMenuItem");
             redoToolStripMenuItem.Click += redoToolStripMenuItem_Click;
             // 
+            // historyToolStripMenuItem
+            // 
+            historyToolStripMenuItem.Name = "historyToolStripMenuItem";
+            resources.ApplyResources(historyToolStripMenuItem, "historyToolStripMenuItem");
+            historyToolStripMenuItem.Click += historyToolStripMenuItem_Click;
+            // 
             // helpToolStripMenuItem
             // 
             helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { macrosToolStripMenuItem, documentationToolStripMenuItem });
@@ -287,12 +293,6 @@
             resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
             // 
-            // historyToolStripMenuItem
-            // 
-            historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            resources.ApplyResources(historyToolStripMenuItem, "historyToolStripMenuItem");
-            historyToolStripMenuItem.Click += historyToolStripMenuItem_Click;
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -304,6 +304,7 @@
             DoubleBuffered = true;
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "MainForm";
             Load += MainForm_Load;
             KeyDown += MainForm_KeyDown;
