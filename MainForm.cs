@@ -20,7 +20,6 @@ namespace FinalProject
         private bool _isReadyForFilling = false;
         private Button lastSelectedButton;
         private ListBox _historyListBox = new ListBox();
-        private const double cmToInch = 2.54;
         private double dpiX, dpiY;
 
         public MainForm()
@@ -33,6 +32,7 @@ namespace FinalProject
         //Paint Event
         private void mainLayout_Paint(object sender, PaintEventArgs e)
         {
+            //Dots per inch
             dpiX = e.Graphics.DpiX;
             dpiY = e.Graphics.DpiY;
 
@@ -49,12 +49,12 @@ namespace FinalProject
             foreach (Figure f in _figures)
             {
                 _drawingPen.Color = f.OutlineColor;
-                f.Draw(e.Graphics, _drawingPen);
                 if (f.IsFill)
                 {
                     _fillingBrush = new SolidBrush(f.FillColor);
                     f.Fill(e.Graphics, _fillingBrush);
                 }
+                f.Draw(e.Graphics, _drawingPen);
             }
         }
 
@@ -197,19 +197,21 @@ namespace FinalProject
             //Finding Area
             if (e.Button == MouseButtons.Middle)
             {
-                foreach (Figure figure in _figures)
+                for (int i = 0; i < _figures.Count; i++)
                 {
+                    var figure = _figures[i];
                     if (figure.Contains(e.Location))
                     {
-                        //Converter Px in Cm
-                        figure.WidthInCm = PixelsToCM(figure.Width, dpiX);
-                        figure.HeightInCm = PixelsToCM(figure.Height, dpiY);
-                        figure.CalculasArea();
-                        MessageBox.Show($"The area of {figure.GetType().Name} is {Math.Round(figure.Area, 2)} cm2");
 
+                        CurrFigureInfo curr = new CurrFigureInfo(figure, dpiX, dpiY);
+                        curr.ShowDialog();
+                        _figures.Remove(figure);
+                        _figures.Add(curr.Figure);
+                        break;
                     }
                 }
             }
+
             //Filling
             if (e.Button == MouseButtons.Right && _isReadyForFilling)
             {
@@ -219,7 +221,6 @@ namespace FinalProject
                     {
                         figure.FillColor = _currColor;
                         figure.IsFill = true;
-                        Invalidate();
                         AddToUndoStack();
                     }
                 }
@@ -242,6 +243,8 @@ namespace FinalProject
             {
                 _startPoint = e.Location;
             }
+            Invalidate();
+            Refresh();
         }
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)
         {
@@ -385,10 +388,7 @@ namespace FinalProject
             }
         }
 
-        private double PixelsToCM(int pixels, double dpi)
-        {
-            return pixels / dpi * cmToInch;
-        }
+
         private void Undo()
         {
             if (_undoStack.Count > 0)
