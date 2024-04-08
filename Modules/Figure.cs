@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace FinalProject.Modules
 {
     [Serializable]
-    public abstract class Figure
+    public abstract class Figure : IFigure
     {
         protected Figure(int x, int y, int width, int height, Color color, Color colorFilling)
         {

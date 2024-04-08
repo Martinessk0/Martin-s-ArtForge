@@ -389,12 +389,16 @@ namespace FinalProject
         {
             return pixels / dpi * cmToInch;
         }
-
         private void Undo()
         {
             if (_undoStack.Count > 0)
             {
-                UpdateHistoryDisplayUndo(_undoStack.Pop());
+                var undoneFigures = _undoStack.Pop();
+                if (undoneFigures.Count > 0)
+                {
+                    var figure = undoneFigures[undoneFigures.Count - 1];
+                    UpdateHistoryDisplay(figure, "Undo");
+                }
 
                 var currentState = new List<Figure>(_figures);
                 _redoStack.Push(currentState);
@@ -405,7 +409,6 @@ namespace FinalProject
                     _figures.AddRange(_undoStack.Peek());
 
                 mainLayout.Invalidate();
-
             }
         }
 
@@ -413,14 +416,19 @@ namespace FinalProject
         {
             if (_redoStack.Count > 0)
             {
-                UpdateHistoryDisplayRedo(_redoStack.Peek());
+                var redoneFigures = _redoStack.Pop();
+                if (redoneFigures.Count > 0)
+                {
+                    var figure = redoneFigures[redoneFigures.Count - 1];
+                    UpdateHistoryDisplay(figure, "Redo");
+                }
+
                 var currentState = new List<Figure>(_figures);
                 _undoStack.Push(currentState);
 
                 _figures.Clear();
                 if (_redoStack.Count > 0) _figures.AddRange(_redoStack.Pop());
                 mainLayout.Invalidate();
-
             }
         }
 
@@ -435,30 +443,10 @@ namespace FinalProject
             _redoStack.Clear();
         }
 
-        private void UpdateHistoryDisplayUndo(List<Figure> figures)
+        private void UpdateHistoryDisplay(Figure figure, string action)
         {
-            figures.Reverse();
-
-            _historyListBox.Text += "Undo";
-            _historyListBox.Text += Environment.NewLine;
-            foreach (var figure in figures)
-            {
-                _historyListBox.Text += figure.ToString();
-                _historyListBox.Text += Environment.NewLine;
-            }
-        }
-
-        private void UpdateHistoryDisplayRedo(List<Figure> figures)
-        {
-            figures.Reverse();
-
-            _historyListBox.Text += "Redo";
-            _historyListBox.Text += Environment.NewLine;
-            foreach (var figure in figures)
-            {
-                _historyListBox.Text += figure.ToString();
-                _historyListBox.Text += Environment.NewLine;
-            }
+            _historyListBox.Text += action + Environment.NewLine;
+            _historyListBox.Text += figure.ToString() + Environment.NewLine;
         }
 
     }
