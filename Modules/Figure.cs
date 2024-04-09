@@ -32,7 +32,7 @@ namespace FinalProject.Modules
         public Figure DeepClone()
         {
             using (MemoryStream memoryStream = new MemoryStream())
-            {
+            {              
                 // Create a BinaryFormatter for serialization
                 IFormatter formatter = new BinaryFormatter();
 

@@ -41,10 +41,14 @@ namespace FinalProject
                     txtHeight.Enabled = false;
                     txtHeight.Text = Figure.Width.ToString();
                     break;
+                //To do start end point
                 case "Line":
                     lblFillColor.Visible = false;
                     lblFill.Visible = false;
                     btnColorFill.Visible = false;
+                    lblWidth.Text = "Start:";
+                    lblHeight.Text = "End:";
+                    (Line)Figure.
                     break;
                 default:
                     break;

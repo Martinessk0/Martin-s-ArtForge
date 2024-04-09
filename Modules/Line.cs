@@ -55,7 +55,7 @@
 
         public override void Fill(Graphics g, Brush brush)
         {
-            
+            //MessageBox.Show("The line cannot be fill");
         }
     }
 }

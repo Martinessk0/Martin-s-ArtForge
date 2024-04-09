@@ -9,17 +9,22 @@ namespace FinalProject
         private readonly Stack<List<Figure>> _redoStack = new Stack<List<Figure>>();
         private readonly List<Figure> _figures = new List<Figure>();
         private DrawingMode _currentDrawingMode = DrawingMode.None;
+
         private static Color _currColor = Color.Black;
+
         private Pen _drawingPen = new Pen(_currColor, 5);
         private Brush? _fillingBrush;
-        private Point _startPoint;
-        private Point _endPoint;
-        private Figure? _selectedFigure = null;
+
+        private Point _startPoint, _endPoint;
         private Point _lastMousePos;
+
+        private Figure? _selectedFigure = null;
+        private ListBox _historyListBox = new ListBox();
+        private Button lastSelectedButton;
+
         private bool _isMovable = false;
         private bool _isReadyForFilling = false;
-        private Button lastSelectedButton;
-        private ListBox _historyListBox = new ListBox();
+        
         private double dpiX, dpiY;
 
         public MainForm()
