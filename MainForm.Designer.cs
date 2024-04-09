@@ -63,8 +63,8 @@
             // 
             // mainLayout
             // 
-            mainLayout.BackColor = Color.White;
             resources.ApplyResources(mainLayout, "mainLayout");
+            mainLayout.BackColor = Color.White;
             mainLayout.Name = "mainLayout";
             mainLayout.Paint += mainLayout_Paint;
             mainLayout.MouseDown += mainPanel_MouseDown;
@@ -77,6 +77,7 @@
             // 
             // upperPanelLayout
             // 
+            resources.ApplyResources(upperPanelLayout, "upperPanelLayout");
             upperPanelLayout.BackColor = Color.LightSeaGreen;
             upperPanelLayout.Controls.Add(lblCurrColor);
             upperPanelLayout.Controls.Add(btnFill);
@@ -84,13 +85,12 @@
             upperPanelLayout.Controls.Add(logo);
             upperPanelLayout.Controls.Add(pickColor);
             upperPanelLayout.Controls.Add(menuStrip1);
-            resources.ApplyResources(upperPanelLayout, "upperPanelLayout");
             upperPanelLayout.Name = "upperPanelLayout";
             // 
             // lblCurrColor
             // 
-            lblCurrColor.BackColor = Color.Transparent;
             resources.ApplyResources(lblCurrColor, "lblCurrColor");
+            lblCurrColor.BackColor = Color.Transparent;
             lblCurrColor.Name = "lblCurrColor";
             // 
             // btnFill
@@ -199,6 +199,7 @@
             // 
             // leftPanelLayout
             // 
+            resources.ApplyResources(leftPanelLayout, "leftPanelLayout");
             leftPanelLayout.BackColor = Color.SpringGreen;
             leftPanelLayout.Controls.Add(btnRectangular);
             leftPanelLayout.Controls.Add(btnEllipse);
@@ -207,7 +208,6 @@
             leftPanelLayout.Controls.Add(btnLine);
             leftPanelLayout.Controls.Add(btnSquare);
             leftPanelLayout.Controls.Add(label2);
-            resources.ApplyResources(leftPanelLayout, "leftPanelLayout");
             leftPanelLayout.Name = "leftPanelLayout";
             // 
             // btnRectangular
@@ -304,7 +304,6 @@
             DoubleBuffered = true;
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
-            MaximizeBox = false;
             Name = "MainForm";
             Load += MainForm_Load;
             KeyDown += MainForm_KeyDown;

@@ -24,7 +24,7 @@ namespace FinalProject
 
         private bool _isMovable = false;
         private bool _isReadyForFilling = false;
-        
+
         private double dpiX, dpiY;
 
         public MainForm()
@@ -62,7 +62,6 @@ namespace FinalProject
                 f.Draw(e.Graphics, _drawingPen);
             }
         }
-
 
 
         //Load
@@ -308,7 +307,6 @@ namespace FinalProject
             {
                 if (figure.Contains(e.Location))
                 {
-                    _selectedFigure = figure;
                     RemoveFigure(figure);
                     AddToUndoStack();
                     Invalidate();
@@ -421,7 +419,7 @@ namespace FinalProject
         {
             if (_redoStack.Count > 0)
             {
-                var redoneFigures = _redoStack.Pop();
+                var redoneFigures = _redoStack.Peek();
                 if (redoneFigures.Count > 0)
                 {
                     var figure = redoneFigures[redoneFigures.Count - 1];

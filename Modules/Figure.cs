@@ -28,6 +28,9 @@ namespace FinalProject.Modules
         public double WidthInCm { get; set; }
         public double Area { get; set; }
 
+        public Point Start { get; set; }
+        public Point End { get; set; }
+
 
         public Figure DeepClone()
         {

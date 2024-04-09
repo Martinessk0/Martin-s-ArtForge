@@ -44,6 +44,10 @@
             btnColorFill = new Button();
             lblOutlineColor = new Label();
             lblFillColor = new Label();
+            txtStartY = new TextBox();
+            txtEndY = new TextBox();
+            lblX = new Label();
+            lblY = new Label();
             SuspendLayout();
             // 
             // lblWidth
@@ -187,12 +191,56 @@
             lblFillColor.Size = new Size(48, 43);
             lblFillColor.TabIndex = 16;
             // 
+            // txtStartY
+            // 
+            txtStartY.Location = new Point(335, 92);
+            txtStartY.Multiline = true;
+            txtStartY.Name = "txtStartY";
+            txtStartY.Size = new Size(183, 38);
+            txtStartY.TabIndex = 17;
+            txtStartY.Visible = false;
+            // 
+            // txtEndY
+            // 
+            txtEndY.Location = new Point(335, 152);
+            txtEndY.Multiline = true;
+            txtEndY.Name = "txtEndY";
+            txtEndY.Size = new Size(183, 38);
+            txtEndY.TabIndex = 18;
+            txtEndY.Visible = false;
+            // 
+            // lblX
+            // 
+            lblX.Font = new Font("Verdana", 13.875F, FontStyle.Regular, GraphicsUnit.Point);
+            lblX.Location = new Point(202, 62);
+            lblX.Margin = new Padding(2, 0, 2, 0);
+            lblX.Name = "lblX";
+            lblX.Size = new Size(33, 27);
+            lblX.TabIndex = 19;
+            lblX.Text = "X:";
+            lblX.Visible = false;
+            // 
+            // lblY
+            // 
+            lblY.Font = new Font("Verdana", 13.875F, FontStyle.Regular, GraphicsUnit.Point);
+            lblY.Location = new Point(410, 62);
+            lblY.Margin = new Padding(2, 0, 2, 0);
+            lblY.Name = "lblY";
+            lblY.Size = new Size(33, 27);
+            lblY.TabIndex = 20;
+            lblY.Text = "Y:";
+            lblY.Visible = false;
+            // 
             // CurrFigureInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SpringGreen;
             ClientSize = new Size(653, 566);
+            Controls.Add(lblY);
+            Controls.Add(lblX);
+            Controls.Add(txtEndY);
+            Controls.Add(txtStartY);
             Controls.Add(lblFillColor);
             Controls.Add(lblOutlineColor);
             Controls.Add(btnColorFill);
@@ -233,5 +281,9 @@
         private Button btnColorFill;
         private Label lblOutlineColor;
         private Label lblFillColor;
+        private TextBox txtStartY;
+        private TextBox txtEndY;
+        private Label lblX;
+        private Label lblY;
     }
 }

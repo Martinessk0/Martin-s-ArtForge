@@ -10,8 +10,6 @@
             this.End = end;
         }
 
-        public Point Start { get; set; }
-        public Point End { get; set; }
 
         public override double CalculasArea()
         {

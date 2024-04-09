@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mainLayout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mainLayout.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 106</value>
@@ -143,8 +147,14 @@
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <data name="upperPanelLayout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lblCurrColor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="lblCurrColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1076, 29</value>
+    <value>1083, 32</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblCurrColor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -168,10 +178,12 @@
   <data name="&gt;&gt;lblCurrColor.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnFill.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="btnFill.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnFill.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
@@ -182,7 +194,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnFill.Location" type="System.Drawing.Point, System.Drawing">
-    <value>972, 29</value>
+    <value>975, 32</value>
   </data>
   <data name="btnFill.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 71</value>
@@ -259,6 +271,9 @@
   <data name="&gt;&gt;logo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="pickColor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="pickColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -269,7 +284,7 @@
     <value>Flat</value>
   </data>
   <data name="pickColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1179, 24</value>
+    <value>1183, 32</value>
   </data>
   <data name="pickColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 71</value>
@@ -402,6 +417,9 @@
   </data>
   <data name="&gt;&gt;upperPanelLayout.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="leftPanelLayout.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
   </data>
   <data name="btnRectangular.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
