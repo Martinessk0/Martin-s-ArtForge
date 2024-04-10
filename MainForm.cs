@@ -440,7 +440,7 @@ namespace FinalProject
             var currentState = new List<Figure>();
             foreach (var figure in _figures)
             {
-                currentState.Add(figure.DeepClone());
+                currentState.Add(figure.Clone());
             }
             _undoStack.Push(currentState);
             _redoStack.Clear();

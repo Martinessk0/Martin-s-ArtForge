@@ -1,6 +1,5 @@
 ﻿namespace FinalProject.Modules
 {
-    [Serializable]
     public class Square : Figure
     {
         public Square(int x, int y, int width, int height, Color outlineColor, Color fillColor)
@@ -12,6 +11,11 @@
         {
             this.Area = WidthInCm * HeightInCm;
             return Area;
+        }
+
+        public override Figure Clone()
+        {
+            return new Square(X, Y, Width, Height, FillColor, OutlineColor);
         }
 
         public override bool Contains(Point point)

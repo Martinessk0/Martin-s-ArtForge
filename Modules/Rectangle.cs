@@ -2,7 +2,6 @@
 
 namespace FinalProject.Modules
 {
-    [Serializable]
     public class Rectangle : Figure
     {
         public Rectangle(int x, int y, int width, int height,Color outlineColor,Color fillColor) 
@@ -31,6 +30,11 @@ namespace FinalProject.Modules
         public override void Fill(Graphics g, Brush brush)
         {
             g.FillRectangle(brush, X, Y, Width, Height);
+        }
+
+        public override Figure Clone()
+        {
+            return new Rectangle(X, Y, Width, Height, FillColor, OutlineColor);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace FinalProject.Modules
         double WidthInCm { get; set; }
         double Area { get; set; }
 
-        Figure DeepClone();
+        Figure Clone();
         double CalculasArea();
         void Draw(Graphics graphics, Pen pen);
         bool Contains(Point point);

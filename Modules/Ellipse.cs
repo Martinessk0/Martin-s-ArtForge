@@ -1,6 +1,5 @@
 ﻿namespace FinalProject.Modules
 {
-    [Serializable]
     public class Ellipse : Figure
     {
         public Ellipse(int x, int y, int width, int height, Color outlineColor, Color fillColor)
@@ -34,6 +33,11 @@
         public override void Fill(Graphics g, Brush brush)
         {
             g.FillEllipse(brush, X, Y, Width, Height);
+        }
+
+        public override Figure Clone()
+        {
+            return new Ellipse(X, Y, Width, Height, FillColor, OutlineColor);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using System.Drawing;
 
 
 namespace FinalProject.Modules
 {
-    [Serializable]
     public abstract class Figure : IFigure
     {
         protected Figure(int x, int y, int width, int height, Color color, Color colorFilling)
@@ -32,32 +32,7 @@ namespace FinalProject.Modules
         public Point End { get; set; }
 
 
-        public Figure DeepClone()
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            {              
-                // Create a BinaryFormatter for serialization
-                IFormatter formatter = new BinaryFormatter();
-
-                // Serialize the current object into memoryStream
-                formatter.Serialize(memoryStream, this);
-
-                // Reset the memoryStream position to the beginning
-                memoryStream.Seek(0, SeekOrigin.Begin);
-
-                // Deserialize the object from memoryStream
-                Figure clonedFigure = (Figure)formatter.Deserialize(memoryStream);
-
-                // Perform a deep copy by creating new instances of referenced objects
-                // Assuming Figure class has properties that need to be deep copied, do it here
-
-                // For example:
-                // clonedFigure.SomeProperty = new SomePropertyType(this.SomeProperty);
-
-                // Return the cloned object
-                return clonedFigure;
-            }
-        }
+        public abstract Figure Clone();
 
         public abstract double CalculasArea();
 
