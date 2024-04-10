@@ -15,7 +15,7 @@
 
         public override Figure Clone()
         {
-            return new Square(X, Y, Width, Height, FillColor, OutlineColor);
+            return new Square(X, Y, Width, Height,OutlineColor, FillColor);
         }
 
         public override bool Contains(Point point)

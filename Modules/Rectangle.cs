@@ -34,7 +34,7 @@ namespace FinalProject.Modules
 
         public override Figure Clone()
         {
-            return new Rectangle(X, Y, Width, Height, FillColor, OutlineColor);
+            return new Rectangle(X, Y, Width, Height,OutlineColor, FillColor);
         }
     }
 }

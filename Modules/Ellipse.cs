@@ -37,7 +37,7 @@
 
         public override Figure Clone()
         {
-            return new Ellipse(X, Y, Width, Height, FillColor, OutlineColor);
+            return new Ellipse(X, Y, Width, Height, OutlineColor, FillColor);
         }
     }
 }

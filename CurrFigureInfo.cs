@@ -55,6 +55,7 @@ namespace FinalProject
                 txtStartY.Text = Figure.Start.Y.ToString();
                 txtHeight.Text = Figure.End.X.ToString();
                 txtEndY.Text = Figure.End.Y.ToString();
+                lblOutlineColor.BackColor = Figure.OutlineColor;
             }
             else if (Figure.GetType().Name == "Square")
             {
