@@ -56,6 +56,7 @@
             btnLine = new Button();
             btnSquare = new Button();
             label2 = new Label();
+            saveFileDialog1 = new SaveFileDialog();
             upperPanelLayout.SuspendLayout();
             menuStrip1.SuspendLayout();
             leftPanelLayout.SuspendLayout();
@@ -150,11 +151,13 @@
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
+            saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // editToolStripMenuItem
             // 
@@ -344,5 +347,6 @@
         private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
         private ToolStripMenuItem historyToolStripMenuItem;
+        private SaveFileDialog saveFileDialog1;
     }
 }

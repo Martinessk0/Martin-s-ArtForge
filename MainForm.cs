@@ -1,5 +1,9 @@
 ﻿using FinalProject.Modules;
+using System.Drawing.Imaging;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace FinalProject
 {
@@ -26,6 +30,9 @@ namespace FinalProject
         private bool _isReadyForFilling = false;
 
         private double dpiX, dpiY;
+
+
+        private Bitmap loadedImage;
 
         public MainForm()
         {
@@ -452,5 +459,93 @@ namespace FinalProject
             _historyListBox.Text += figure.ToString() + Environment.NewLine;
         }
 
+        //private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
+        //    mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
+
+        //    // Ask user for a file name to save the image
+        //    SaveFileDialog saveFileDialog = new SaveFileDialog();
+        //    saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg";
+        //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        //    {
+        //        // Determine the file format based on the chosen filter
+        //        ImageFormat format = ImageFormat.Png; // Default to PNG
+        //        if (saveFileDialog.FilterIndex == 2)
+        //            format = ImageFormat.Jpeg;
+
+        //        // Save the bitmap to the specified file
+        //        bitmap.Save(saveFileDialog.FileName, format);
+        //    }
+        //}
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Filter = "PNG files (*.png)|*.png|All files (*.*)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Save image
+                    Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
+                    mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
+                    bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+
+                    // Show save dialog for figures
+                    dialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Serialize list of figures
+                        SerializeFigures(dialog.FileName);
+                        _figures.Clear();
+                        Invalidate();
+                    }
+                }
+            }
+        }
+        private void SerializeFigures(string filename)
+        {
+            using (FileStream stream = new FileStream(filename, FileMode.Create))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, _figures);
+            }
+        }
+
+        private List<Figure> DeserializeFigures(string filename)
+        {
+            List<Figure> deserializedFigures = new List<Figure>();
+            if (File.Exists(filename))
+            {
+                using (FileStream stream = new FileStream(filename, FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    deserializedFigures = (List<Figure>)formatter.Deserialize(stream);
+                }
+            }
+            return deserializedFigures;
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "PNG files (*.png)|*.png|All files (*.*)|*.*";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Show open dialog for figures
+                    dialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        // Deserialize list of figures
+                        _figures.AddRange(DeserializeFigures(dialog.FileName));
+
+                        // Redraw figures
+                        mainLayout.Invalidate();
+                    }
+                }
+            }
+        }
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace FinalProject.Modules
 {
+    [Serializable]
     public class Line : Figure
     {
         public Line(Point start, Point end, int x, int y, int width, int height, Color outlineColor, Color fillColor)
