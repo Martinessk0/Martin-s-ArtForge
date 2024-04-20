@@ -201,7 +201,7 @@ namespace FinalProject
         }
         private void mainPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            //Finding Area
+            //Finding Area and editing figure
             if (e.Button == MouseButtons.Middle)
             {
                 for (int i = 0; i < _figures.Count; i++)
@@ -209,11 +209,12 @@ namespace FinalProject
                     var figure = _figures[i];
                     if (figure.Contains(e.Location))
                     {
-
+                        Figure oldFigure = figure.Clone();
                         CurrFigureInfo curr = new CurrFigureInfo(figure, dpiX, dpiY);
                         curr.ShowDialog();
+                        ICommand draw = new EditingCommand(_figures,curr.Figure, oldFigure);
+                        _manager.ExecuteCommand(draw);
                         _figures.Remove(figure);
-                        _figures.Add(curr.Figure);
                         break;
                     }
                 }
