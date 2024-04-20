@@ -20,13 +20,15 @@ namespace FinalProject
         private Point _lastMousePos;
 
         private Figure? _selectedFigure = null;
+        private Figure? _oldFigure = null;
         private ListBox _historyListBox = new ListBox();
         private Button lastSelectedButton;
 
         private bool _isMovable = false;
         private bool _isReadyForFilling = false;
 
-        private double dpiX, dpiY;
+        private double _dpiX, _dpiY;
+        private int _dx, _dy;
 
         public MainForm()
             => InitializeComponent();
@@ -35,8 +37,8 @@ namespace FinalProject
         private void mainLayout_Paint(object sender, PaintEventArgs e)
         {
             //Dots per inch
-            dpiX = e.Graphics.DpiX;
-            dpiY = e.Graphics.DpiY;
+            _dpiX = e.Graphics.DpiX;
+            _dpiY = e.Graphics.DpiY;
 
             //if (_undoStack.Count > 0)
             //    undoToolStripMenuItem.Enabled = true;
@@ -210,7 +212,7 @@ namespace FinalProject
                     if (figure.Contains(e.Location))
                     {
                         Figure oldFigure = figure.Clone();
-                        CurrFigureInfo curr = new CurrFigureInfo(figure, dpiX, dpiY);
+                        CurrFigureInfo curr = new CurrFigureInfo(figure, _dpiX, _dpiY);
                         curr.ShowDialog();
                         ICommand draw = new EditingCommand(_figures,curr.Figure, oldFigure);
                         _manager.ExecuteCommand(draw);
@@ -241,6 +243,8 @@ namespace FinalProject
                     {
                         _selectedFigure = figure;
                         _lastMousePos = e.Location;
+                        _dx = figure.X;
+                        _dy = figure.Y;
                         break;
                     }
                 }
@@ -250,6 +254,7 @@ namespace FinalProject
             {
                 _startPoint = e.Location;
             }
+
             Invalidate();
             Refresh();
         }
@@ -260,14 +265,15 @@ namespace FinalProject
             {
                 _endPoint = e.Location;
                 DrawShape(_startPoint, _endPoint, e);
-                //AddToUndoStack();
             }
             //Movement Undo Feature
             if (_isMovable && (_selectedFigure != null && e.Button == MouseButtons.Left))
             {
-                //AddToUndoStack();
+                ICommand move = new MoveCommand(_selectedFigure, _dx,_dy);
+                _manager.ExecuteCommand(move);
             }
 
+            _oldFigure = null;
             _selectedFigure = null;
             mainLayout.Invalidate();
             Refresh();

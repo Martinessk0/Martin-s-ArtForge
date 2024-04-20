@@ -10,24 +10,28 @@ namespace FinalProject.UndoFeature
     public class MoveCommand : ICommand
     {
         private Figure _figure;
-        private List<Figure> _oldFigures = new List<Figure>();
-        private List<Figure> _figures;
-        public MoveCommand(Figure figure, List<Figure> figures)
+        private int _oldDx, _oldDy;
+        private int _newDx, _newDy;
+
+        public MoveCommand(Figure figure, int dx, int dy)
         {
             _figure = figure;
-            _figures = figures;
-            _oldFigures.AddRange(_figures);
-
+            _oldDx = dx;
+            _oldDy = dy;
+            _newDx = _figure.X;
+            _newDy = _figure.Y;
         }
+
         public void Execute()
         {
-            _figures.Add(_figure);
+            _figure.X = _newDx;
+            _figure.Y = _newDy;
         }
 
         public void Undo()
         {
-            _figures.Clear();
-            _figures.AddRange(_oldFigures);
+            _figure.X = _oldDx;
+            _figure.Y = _oldDy;
         }
     }
 }
