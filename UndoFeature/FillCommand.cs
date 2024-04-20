@@ -1,15 +1,30 @@
-﻿namespace FinalProject.UndoFeature
+﻿using FinalProject.Modules;
+
+namespace FinalProject.UndoFeature
 {
     public class FillCommand : ICommand
     {
+        private Figure _figure;
+        private Color _color;
+        private Color _oldColor;
+
+        public FillCommand(Figure figure,Color color,Color oldColor)
+        {
+            _figure = figure;
+            _color = color;
+            _oldColor = oldColor;
+        }
+
         public void Execute()
         {
-            throw new NotImplementedException();
+            _figure.FillColor = _color;
+            _figure.IsFill = true;
         }
 
         public void Undo()
         {
-            throw new NotImplementedException();
+            _figure.FillColor = _oldColor;
+            _figure.IsFill = false;
         }
     }
 }

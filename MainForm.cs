@@ -28,15 +28,8 @@ namespace FinalProject
 
         private double dpiX, dpiY;
 
-
-        private Bitmap loadedImage;
-
         public MainForm()
-        {
-            InitializeComponent();
-        }
-
-
+            => InitializeComponent();
 
         //Paint Event
         private void mainLayout_Paint(object sender, PaintEventArgs e)
@@ -135,7 +128,6 @@ namespace FinalProject
         {
             _manager.Undo();
             mainLayout.Invalidate();
-            //Undo();
         }
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -233,9 +225,8 @@ namespace FinalProject
                 {
                     if (figure.Contains(e.Location))
                     {
-                        figure.FillColor = _currColor;
-                        figure.IsFill = true;
-                        // AddToUndoStack();
+                        ICommand draw = new FillCommand(figure,_currColor,figure.FillColor);
+                        _manager.ExecuteCommand(draw);
                     }
                 }
             }
