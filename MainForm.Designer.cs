@@ -167,8 +167,8 @@
             // 
             // undoToolStripMenuItem
             // 
-            resources.ApplyResources(undoToolStripMenuItem, "undoToolStripMenuItem");
             undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            resources.ApplyResources(undoToolStripMenuItem, "undoToolStripMenuItem");
             undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
             // 
             // redoToolStripMenuItem

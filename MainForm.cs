@@ -1,17 +1,14 @@
 ﻿using FinalProject.Modules;
-using System.Drawing.Imaging;
+using FinalProject.UndoFeature;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace FinalProject
 {
     public partial class MainForm : Form
     {
-        private readonly Stack<List<Figure>> _undoStack = new Stack<List<Figure>>();
-        private readonly Stack<List<Figure>> _redoStack = new Stack<List<Figure>>();
         private readonly List<Figure> _figures = new List<Figure>();
+        private readonly UndoRedoManager _manager = new UndoRedoManager();
         private DrawingMode _currentDrawingMode = DrawingMode.None;
 
         private static Color _currColor = Color.Black;
@@ -48,15 +45,15 @@ namespace FinalProject
             dpiX = e.Graphics.DpiX;
             dpiY = e.Graphics.DpiY;
 
-            if (_undoStack.Count > 0)
-                undoToolStripMenuItem.Enabled = true;
-            else
-                undoToolStripMenuItem.Enabled = false;
+            //if (_undoStack.Count > 0)
+            //    undoToolStripMenuItem.Enabled = true;
+            //else
+            //    undoToolStripMenuItem.Enabled = false;
 
-            if (_redoStack.Count > 0)
-                redoToolStripMenuItem.Enabled = true;
-            else
-                redoToolStripMenuItem.Enabled = false;
+            //if (_redoStack.Count > 0)
+            //    redoToolStripMenuItem.Enabled = true;
+            //else
+            //    redoToolStripMenuItem.Enabled = false;
 
             foreach (Figure f in _figures)
             {
@@ -136,11 +133,14 @@ namespace FinalProject
         }
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Undo();
+            _manager.Undo();
+            mainLayout.Invalidate();
+            //Undo();
         }
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Redo();
+            _manager.Redo();
+            mainLayout.Invalidate();
         }
         private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -154,7 +154,8 @@ namespace FinalProject
         }
         private void AddFigure(Figure figure)
         {
-            _figures.Add(figure);
+            ICommand draw = new DrawCommand(_figures, figure);
+            _manager.ExecuteCommand(draw);
         }
         private void RemoveFigure(Figure figure)
         {
@@ -179,11 +180,13 @@ namespace FinalProject
         {
             if (e.KeyCode == Keys.Z && e.Control)
             {
-                Undo();
+                _manager.Undo();
+                mainLayout.Invalidate();
             }
             if (e.KeyCode == Keys.X && e.Control)
             {
-                Redo();
+                _manager.Redo();
+                mainLayout.Invalidate();
             }
             if (e.KeyCode == Keys.C && e.Control)
             {
@@ -232,7 +235,7 @@ namespace FinalProject
                     {
                         figure.FillColor = _currColor;
                         figure.IsFill = true;
-                        AddToUndoStack();
+                        // AddToUndoStack();
                     }
                 }
             }
@@ -264,12 +267,12 @@ namespace FinalProject
             {
                 _endPoint = e.Location;
                 DrawShape(_startPoint, _endPoint, e);
-                AddToUndoStack();
+                //AddToUndoStack();
             }
             //Movement Undo Feature
             if (_isMovable && (_selectedFigure != null && e.Button == MouseButtons.Left))
             {
-                AddToUndoStack();
+                //AddToUndoStack();
             }
 
             _selectedFigure = null;
@@ -315,7 +318,7 @@ namespace FinalProject
                 if (figure.Contains(e.Location))
                 {
                     RemoveFigure(figure);
-                    AddToUndoStack();
+                    //AddToUndoStack();
                     Invalidate();
                     break;
                 }
@@ -398,86 +401,6 @@ namespace FinalProject
             }
         }
 
-
-        private void Undo()
-        {
-            if (_undoStack.Count > 0)
-            {
-                var undoneFigures = _undoStack.Pop();
-                if (undoneFigures.Count > 0)
-                {
-                    var figure = undoneFigures[undoneFigures.Count - 1];
-                    UpdateHistoryDisplay(figure, "Undo");
-                }
-
-                var currentState = new List<Figure>(_figures);
-                _redoStack.Push(currentState);
-
-                _figures.Clear();
-
-                if (_undoStack.Count > 0)
-                    _figures.AddRange(_undoStack.Peek());
-
-                mainLayout.Invalidate();
-            }
-        }
-
-        private void Redo()
-        {
-            if (_redoStack.Count > 0)
-            {
-                var redoneFigures = _redoStack.Peek();
-                if (redoneFigures.Count > 0)
-                {
-                    var figure = redoneFigures[redoneFigures.Count - 1];
-                    UpdateHistoryDisplay(figure, "Redo");
-                }
-
-                var currentState = new List<Figure>(_figures);
-                _undoStack.Push(currentState);
-
-                _figures.Clear();
-                if (_redoStack.Count > 0) _figures.AddRange(_redoStack.Pop());
-                mainLayout.Invalidate();
-            }
-        }
-
-        private void AddToUndoStack()
-        {
-            var currentState = new List<Figure>();
-            foreach (var figure in _figures)
-            {
-                currentState.Add(figure.Clone());
-            }
-            _undoStack.Push(currentState);
-            _redoStack.Clear();
-        }
-
-        private void UpdateHistoryDisplay(Figure figure, string action)
-        {
-            _historyListBox.Text += action + Environment.NewLine;
-            _historyListBox.Text += figure.ToString() + Environment.NewLine;
-        }
-
-        //private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
-        //    mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
-
-        //    // Ask user for a file name to save the image
-        //    SaveFileDialog saveFileDialog = new SaveFileDialog();
-        //    saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg";
-        //    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-        //    {
-        //        // Determine the file format based on the chosen filter
-        //        ImageFormat format = ImageFormat.Png; // Default to PNG
-        //        if (saveFileDialog.FilterIndex == 2)
-        //            format = ImageFormat.Jpeg;
-
-        //        // Save the bitmap to the specified file
-        //        bitmap.Save(saveFileDialog.FileName, format);
-        //    }
-        //}
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
