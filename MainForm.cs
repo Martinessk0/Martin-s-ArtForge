@@ -211,12 +211,12 @@ namespace FinalProject
                     var figure = _figures[i];
                     if (figure.Contains(e.Location))
                     {
-                        Figure oldFigure = figure.Clone();
+                        var oldV = figure.Clone();
                         CurrFigureInfo curr = new CurrFigureInfo(figure, _dpiX, _dpiY);
                         curr.ShowDialog();
-                        ICommand draw = new EditingCommand(_figures,curr.Figure, oldFigure);
-                        _manager.ExecuteCommand(draw);
-                        _figures.Remove(figure);
+                        
+                        ICommand editing = new EditingCommand(curr.Figure, oldV);
+                        _manager.ExecuteCommand(editing);
                         break;
                     }
                 }
@@ -255,7 +255,7 @@ namespace FinalProject
                 _startPoint = e.Location;
             }
 
-            Invalidate();
+            mainLayout.Invalidate();
             Refresh();
         }
         private void mainPanel_MouseUp(object sender, MouseEventArgs e)

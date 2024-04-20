@@ -1,30 +1,44 @@
 ﻿using FinalProject.Modules;
+using System.Reflection;
 
 namespace FinalProject.UndoFeature
 {
     public class EditingCommand : ICommand
     {
         private Figure _figure;
-        private List<Figure> _figures;
         private Figure _oldFigure;
+        private Figure _newFigure;
 
-        public EditingCommand(List<Figure> figures,Figure figure,Figure oldFigure)
+        public EditingCommand(Figure figure,Figure oldFigure)
         {
             _figure = figure;
-            _figures = figures;
-            _oldFigure = oldFigure;
-
+            _oldFigure = oldFigure; 
+            _newFigure = figure.Clone();
         }
         public void Execute()
         {
-            _figures.Remove(_oldFigure);
-            _figures.Add(_figure);
+            PropertyInfo[] properties = _figure.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.CanWrite)
+                {
+                    object value = property.GetValue(_newFigure);
+                    property.SetValue(_figure, value);
+                }
+            }
         }
 
         public void Undo()
         {
-            _figures.Remove(_figure);
-            _figures.Add(_oldFigure);   
+            PropertyInfo[] properties = _figure.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.CanWrite)
+                {
+                    object value = property.GetValue(_oldFigure);
+                    property.SetValue(_figure, value);
+                }
+            }
         }
     }
 }
