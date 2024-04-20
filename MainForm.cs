@@ -151,7 +151,8 @@ namespace FinalProject
         }
         private void RemoveFigure(Figure figure)
         {
-            _figures.Remove(figure);
+            ICommand draw = new EraseCommand(_figures, figure);
+            _manager.ExecuteCommand(draw);
         }
         private void pickColor_Click(object sender, EventArgs e)
         {
