@@ -20,7 +20,6 @@ namespace FinalProject
         private Point _lastMousePos;
 
         private Figure? _selectedFigure = null;
-        private Figure? _oldFigure = null;
         private ListBox _historyListBox = new ListBox();
         private Button lastSelectedButton;
 
@@ -214,7 +213,7 @@ namespace FinalProject
                         var oldV = figure.Clone();
                         CurrFigureInfo curr = new CurrFigureInfo(figure, _dpiX, _dpiY);
                         curr.ShowDialog();
-                        
+
                         ICommand editing = new EditingCommand(curr.Figure, oldV);
                         _manager.ExecuteCommand(editing);
                         break;
@@ -273,7 +272,6 @@ namespace FinalProject
                 _manager.ExecuteCommand(move);
             }
 
-            _oldFigure = null;
             _selectedFigure = null;
             mainLayout.Invalidate();
             Refresh();

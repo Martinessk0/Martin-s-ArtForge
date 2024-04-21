@@ -14,6 +14,10 @@ namespace FinalProject.UndoFeature
             _figure = figure;
             _oldFigure = oldFigure; 
             _newFigure = figure.Clone();
+            if (figure.IsFill == true)
+            {
+                _newFigure.IsFill = true;
+            }
         }
         public void Execute()
         {
