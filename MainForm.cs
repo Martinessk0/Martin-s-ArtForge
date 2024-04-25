@@ -471,27 +471,20 @@ namespace FinalProject
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpeg)|*.jpeg|Data files (*.dat)|*.dat|All files (*.*)|*.*";
+                dialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (dialog.FilterIndex == 0)
-                    {
-                        Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
-                        mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
-                        bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
-                    }
-                    else if (dialog.FilterIndex == 2)
-                    {
-                        Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
-                        mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
-                        bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    }
-                    else if (dialog.FilterIndex == 3)
+                    try
                     {
                         SerializeFigures(dialog.FileName);
                         _figures.Clear();
-                        Invalidate();
+                        mainLayout.Invalidate();
+                        MessageBox.Show("File saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error loading file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -526,11 +519,64 @@ namespace FinalProject
                 dialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    _figures.AddRange(DeserializeFigures(dialog.FileName));
-                    mainLayout.Invalidate();
+                    try
+                    {
+                        _figures.AddRange(DeserializeFigures(dialog.FileName));
+                        mainLayout.Invalidate();
+                        MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error loading file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void pngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Filter = "PNG files (*.png)|*.png|All files (*.*)|*.*";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
+                        mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
+                        bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                        MessageBox.Show("File saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error loading file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void jpegToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Filter = "JPEG files (*.jpeg)|*.jpeg|All files (*.*)|*.*";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
+                        mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
+                        bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error loading file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
     }
 }
-}
+

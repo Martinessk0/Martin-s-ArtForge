@@ -41,6 +41,9 @@
             fileToolStripMenuItem = new ToolStripMenuItem();
             saveAsToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
+            exportToolStripMenuItem = new ToolStripMenuItem();
+            pngToolStripMenuItem = new ToolStripMenuItem();
+            jpegToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             undoToolStripMenuItem = new ToolStripMenuItem();
             redoToolStripMenuItem = new ToolStripMenuItem();
@@ -143,7 +146,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveAsToolStripMenuItem, openToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveAsToolStripMenuItem, openToolStripMenuItem, exportToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
@@ -158,6 +161,24 @@
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            // 
+            // exportToolStripMenuItem
+            // 
+            exportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pngToolStripMenuItem, jpegToolStripMenuItem });
+            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
+            // 
+            // pngToolStripMenuItem
+            // 
+            pngToolStripMenuItem.Name = "pngToolStripMenuItem";
+            resources.ApplyResources(pngToolStripMenuItem, "pngToolStripMenuItem");
+            pngToolStripMenuItem.Click += pngToolStripMenuItem_Click;
+            // 
+            // jpegToolStripMenuItem
+            // 
+            jpegToolStripMenuItem.Name = "jpegToolStripMenuItem";
+            resources.ApplyResources(jpegToolStripMenuItem, "jpegToolStripMenuItem");
+            jpegToolStripMenuItem.Click += jpegToolStripMenuItem_Click;
             // 
             // editToolStripMenuItem
             // 
@@ -348,5 +369,8 @@
         private ToolStripMenuItem openToolStripMenuItem;
         private ToolStripMenuItem historyToolStripMenuItem;
         private SaveFileDialog saveFileDialog1;
+        private ToolStripMenuItem exportToolStripMenuItem;
+        private ToolStripMenuItem pngToolStripMenuItem;
+        private ToolStripMenuItem jpegToolStripMenuItem;
     }
 }
