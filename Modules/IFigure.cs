@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Modules
 {
+    
     public interface IFigure
     {
         bool IsFill { get; set; }

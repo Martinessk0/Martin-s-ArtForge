@@ -1,4 +1,6 @@
-﻿namespace FinalProject.Modules
+﻿using System.Text.Json.Serialization;
+
+namespace FinalProject.Modules
 {
     [Serializable]
     public class Ellipse : Figure

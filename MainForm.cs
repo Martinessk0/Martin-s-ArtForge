@@ -1,6 +1,11 @@
 ﻿using FinalProject.Modules;
 using FinalProject.UndoFeature;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace FinalProject
@@ -316,7 +321,6 @@ namespace FinalProject
                 if (figure.Contains(e.Location))
                 {
                     RemoveFigure(figure);
-                    //AddToUndoStack();
                     Invalidate();
                     break;
                 }
@@ -400,23 +404,91 @@ namespace FinalProject
         }
 
 
+        //private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+        //    {
+        //        saveFileDialog.Filter = "JSON files (*.json)|*.json";
+        //        saveFileDialog.Title = "Save As";
+
+        //        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            try
+        //            {
+        //                string fileName = saveFileDialog.FileName;
+
+        //                string json = JsonConvert.SerializeObject(_figures,
+        //                    new JsonSerializerSettings
+        //                    {
+        //                        TypeNameHandling = TypeNameHandling.All,
+        //                        Formatting = Formatting.Indented
+        //                    });
+
+        //                File.WriteAllText(fileName, json);
+        //                MessageBox.Show("File saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show($"Error saving file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+        //    {
+        //        openFileDialog.Filter = "JSON files (*.json)|*.json";
+        //        openFileDialog.Title = "Open";
+
+        //        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            try
+        //            {
+        //                string fileName = openFileDialog.FileName;
+        //                string json = File.ReadAllText(fileName);
+
+        //                var loadedFigures = JsonConvert.DeserializeObject<List<Figure>>(json, new JsonSerializerSettings
+        //                {
+        //                    TypeNameHandling = TypeNameHandling.All,
+        //                    Formatting = Formatting.Indented
+        //                });
+
+        //                _figures.Clear();
+        //                _figures.AddRange(loadedFigures);
+        //                mainLayout.Invalidate();
+        //                MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show($"Error loading file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            }
+        //        }
+        //    }
+        //}
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dialog.Filter = "PNG files (*.png)|*.png|All files (*.*)|*.*";
+                dialog.Filter = "PNG files (*.png)|*.png|JPEG files (*.jpeg)|*.jpeg|Data files (*.dat)|*.dat|All files (*.*)|*.*";
+
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Save image
-                    Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
-                    mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
-                    bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
-
-                    // Show save dialog for figures
-                    dialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
-                    if (dialog.ShowDialog() == DialogResult.OK)
+                    if (dialog.FilterIndex == 0)
                     {
-                        // Serialize list of figures
+                        Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
+                        mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
+                        bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+                    else if (dialog.FilterIndex == 2)
+                    {
+                        Bitmap bitmap = new Bitmap(mainLayout.Width, mainLayout.Height);
+                        mainLayout.DrawToBitmap(bitmap, mainLayout.ClientRectangle);
+                        bitmap.Save(dialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    }
+                    else if (dialog.FilterIndex == 3)
+                    {
                         SerializeFigures(dialog.FileName);
                         _figures.Clear();
                         Invalidate();
@@ -451,22 +523,14 @@ namespace FinalProject
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
-                dialog.Filter = "PNG files (*.png)|*.png|All files (*.*)|*.*";
+                dialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Show open dialog for figures
-                    dialog.Filter = "Data files (*.dat)|*.dat|All files (*.*)|*.*";
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        // Deserialize list of figures
-                        _figures.AddRange(DeserializeFigures(dialog.FileName));
-
-                        // Redraw figures
-                        mainLayout.Invalidate();
-                    }
+                    _figures.AddRange(DeserializeFigures(dialog.FileName));
+                    mainLayout.Invalidate();
                 }
             }
         }
     }
-
+}
 }
