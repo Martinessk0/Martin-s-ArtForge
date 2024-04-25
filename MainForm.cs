@@ -77,6 +77,9 @@ namespace FinalProject
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
             | BindingFlags.Instance | BindingFlags.NonPublic, null,
             mainLayout, new object[] { true });
+            var sizeA = mainLayout.Size.Width;
+            var sizeB = mainLayout.Size.Height;
+            lblSize.Text = $"{sizeA} : {sizeB}";
         }
 
 
@@ -576,6 +579,13 @@ namespace FinalProject
                     }
                 }
             }
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            var sizeA = mainLayout.Size.Width;
+            var sizeB = mainLayout.Size.Height;
+            lblSize.Text = $"{sizeA} : {sizeB}";
         }
     }
 }

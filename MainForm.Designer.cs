@@ -52,6 +52,7 @@
             macrosToolStripMenuItem = new ToolStripMenuItem();
             documentationToolStripMenuItem = new ToolStripMenuItem();
             leftPanelLayout = new Panel();
+            lblSize = new Label();
             btnRectangular = new Button();
             btnEllipse = new Button();
             btnMove = new Button();
@@ -225,6 +226,7 @@
             // 
             resources.ApplyResources(leftPanelLayout, "leftPanelLayout");
             leftPanelLayout.BackColor = Color.SpringGreen;
+            leftPanelLayout.Controls.Add(lblSize);
             leftPanelLayout.Controls.Add(btnRectangular);
             leftPanelLayout.Controls.Add(btnEllipse);
             leftPanelLayout.Controls.Add(btnMove);
@@ -233,6 +235,11 @@
             leftPanelLayout.Controls.Add(btnSquare);
             leftPanelLayout.Controls.Add(label2);
             leftPanelLayout.Name = "leftPanelLayout";
+            // 
+            // lblSize
+            // 
+            resources.ApplyResources(lblSize, "lblSize");
+            lblSize.Name = "lblSize";
             // 
             // btnRectangular
             // 
@@ -331,6 +338,7 @@
             Name = "MainForm";
             Load += MainForm_Load;
             KeyDown += MainForm_KeyDown;
+            Resize += MainForm_Resize;
             upperPanelLayout.ResumeLayout(false);
             upperPanelLayout.PerformLayout();
             menuStrip1.ResumeLayout(false);
@@ -372,5 +380,6 @@
         private ToolStripMenuItem exportToolStripMenuItem;
         private ToolStripMenuItem pngToolStripMenuItem;
         private ToolStripMenuItem jpegToolStripMenuItem;
+        private Label lblSize;
     }
 }
