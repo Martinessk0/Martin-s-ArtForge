@@ -27,7 +27,7 @@ namespace FinalProject
         private bool _isReadyForFilling = false;
 
         private double _dpiX, _dpiY;
-        private int _dx, _dy;
+        private int _x, _y;
 
         public MainForm()
             => InitializeComponent();
@@ -115,6 +115,7 @@ namespace FinalProject
         private void btnMove_Click(object sender, EventArgs e)
         {
             SelectButton(btnMove);
+            _isMovable = false;
             _isReadyForFilling = false;
             _currentDrawingMode = DrawingMode.Move;
         }
@@ -142,7 +143,7 @@ namespace FinalProject
         }
         private void historyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HistoryForm history = new HistoryForm(_historyListBox);
+            HistoryForm history = new HistoryForm(_manager.HistoryTextBox);
             history.ShowDialog();
         }
         private void AddFigure(Figure figure)
@@ -152,8 +153,8 @@ namespace FinalProject
         }
         private void RemoveFigure(Figure figure)
         {
-            ICommand draw = new EraseCommand(_figures, figure);
-            _manager.ExecuteCommand(draw);
+            ICommand erase = new EraseCommand(_figures, figure);
+            _manager.ExecuteCommand(erase);
         }
         private void pickColor_Click(object sender, EventArgs e)
         {
@@ -182,7 +183,7 @@ namespace FinalProject
                 _manager.Redo();
                 mainLayout.Invalidate();
             }
-            if (e.KeyCode == Keys.C && e.Control)
+            if (e.KeyCode == Keys.H && e.Control)
             {
                 HistoryForm history = new HistoryForm(_historyListBox);
                 history.ShowDialog();
@@ -228,7 +229,7 @@ namespace FinalProject
                 {
                     if (figure.Contains(e.Location))
                     {
-                        ICommand draw = new FillCommand(figure,_currColor,figure.FillColor);
+                        ICommand draw = new FillCommand(figure, _currColor);
                         _manager.ExecuteCommand(draw);
                     }
                 }
@@ -242,8 +243,8 @@ namespace FinalProject
                     {
                         _selectedFigure = figure;
                         _lastMousePos = e.Location;
-                        _dx = figure.X;
-                        _dy = figure.Y;
+                        _x = figure.X;
+                        _y = figure.Y;
                         break;
                     }
                 }
@@ -268,7 +269,7 @@ namespace FinalProject
             //Movement Undo Feature
             if (_isMovable && (_selectedFigure != null && e.Button == MouseButtons.Left))
             {
-                ICommand move = new MoveCommand(_selectedFigure, _dx,_dy);
+                ICommand move = new MoveCommand(_selectedFigure, _x, _y);
                 _manager.ExecuteCommand(move);
             }
 

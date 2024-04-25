@@ -8,11 +8,11 @@ namespace FinalProject.UndoFeature
         private Color _color;
         private Color _oldColor;
 
-        public FillCommand(Figure figure,Color color,Color oldColor)
+        public FillCommand(Figure figure,Color color)
         {
             _figure = figure;
             _color = color;
-            _oldColor = oldColor;
+            _oldColor = figure.FillColor;
         }
 
         public void Execute()
