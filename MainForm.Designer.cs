@@ -49,7 +49,6 @@
             redoToolStripMenuItem = new ToolStripMenuItem();
             historyToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
-            macrosToolStripMenuItem = new ToolStripMenuItem();
             documentationToolStripMenuItem = new ToolStripMenuItem();
             leftPanelLayout = new Panel();
             lblSize = new Label();
@@ -61,6 +60,7 @@
             btnSquare = new Button();
             label2 = new Label();
             saveFileDialog1 = new SaveFileDialog();
+            calculationToolStripMenuItem = new ToolStripMenuItem();
             upperPanelLayout.SuspendLayout();
             menuStrip1.SuspendLayout();
             leftPanelLayout.SuspendLayout();
@@ -207,14 +207,9 @@
             // 
             // helpToolStripMenuItem
             // 
-            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { macrosToolStripMenuItem, documentationToolStripMenuItem });
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { calculationToolStripMenuItem, documentationToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
-            // 
-            // macrosToolStripMenuItem
-            // 
-            macrosToolStripMenuItem.Name = "macrosToolStripMenuItem";
-            resources.ApplyResources(macrosToolStripMenuItem, "macrosToolStripMenuItem");
             // 
             // documentationToolStripMenuItem
             // 
@@ -324,6 +319,12 @@
             resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
             // 
+            // calculationToolStripMenuItem
+            // 
+            calculationToolStripMenuItem.Name = "calculationToolStripMenuItem";
+            resources.ApplyResources(calculationToolStripMenuItem, "calculationToolStripMenuItem");
+            calculationToolStripMenuItem.Click += calculationToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -371,7 +372,6 @@
         private ToolStripMenuItem undoToolStripMenuItem;
         private ToolStripMenuItem redoToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
-        private ToolStripMenuItem macrosToolStripMenuItem;
         private ToolStripMenuItem documentationToolStripMenuItem;
         private ToolStripMenuItem saveAsToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
@@ -381,5 +381,6 @@
         private ToolStripMenuItem pngToolStripMenuItem;
         private ToolStripMenuItem jpegToolStripMenuItem;
         private Label lblSize;
+        private ToolStripMenuItem calculationToolStripMenuItem;
     }
 }

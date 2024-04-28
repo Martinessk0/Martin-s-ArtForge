@@ -1,11 +1,6 @@
 ﻿using FinalProject.Modules;
 using FinalProject.UndoFeature;
 using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
-using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace FinalProject
@@ -179,6 +174,12 @@ namespace FinalProject
 
 
         //Events
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            var sizeA = mainLayout.Size.Width;
+            var sizeB = mainLayout.Size.Height;
+            lblSize.Text = $"{sizeA} : {sizeB}";
+        }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Z && e.Control)
@@ -197,7 +198,6 @@ namespace FinalProject
                 history.ShowDialog();
             }
         }
-
         private void mainLayout_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isMovable && (_selectedFigure != null && e.Button == MouseButtons.Left))
@@ -581,11 +581,10 @@ namespace FinalProject
             }
         }
 
-        private void MainForm_Resize(object sender, EventArgs e)
+        private void calculationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var sizeA = mainLayout.Size.Width;
-            var sizeB = mainLayout.Size.Height;
-            lblSize.Text = $"{sizeA} : {sizeB}";
+            CalculationForm calculation = new CalculationForm(_figures);
+            calculation.ShowDialog();
         }
     }
 }
