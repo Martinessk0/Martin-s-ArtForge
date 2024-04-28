@@ -323,16 +323,16 @@
     <value>344, 17</value>
   </metadata>
   <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 44</value>
+    <value>409, 44</value>
   </data>
   <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save As</value>
+    <value>Save As (Shift + Ctrl + S)</value>
   </data>
   <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 44</value>
+    <value>409, 44</value>
   </data>
   <data name="openToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open</value>
+    <value>Open (Ctrl + O)</value>
   </data>
   <data name="pngToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 44</value>
@@ -347,10 +347,16 @@
     <value>.jpeg</value>
   </data>
   <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 44</value>
+    <value>409, 44</value>
   </data>
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>Export</value>
+  </data>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 44</value>
+  </data>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exit</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 38</value>
@@ -383,16 +389,16 @@
     <value>Edit</value>
   </data>
   <data name="calculationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 44</value>
+    <value>418, 44</value>
   </data>
   <data name="calculationToolStripMenuItem.Text" xml:space="preserve">
-    <value>Calculation</value>
+    <value>Calculation (Ctrl + C)</value>
   </data>
   <data name="documentationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 44</value>
+    <value>418, 44</value>
   </data>
   <data name="documentationToolStripMenuItem.Text" xml:space="preserve">
-    <value>Documentation</value>
+    <value>Documentation (Ctrl + D)</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 38</value>
@@ -829,6 +835,12 @@
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;calculationToolStripMenuItem.Name" xml:space="preserve">
+    <value>calculationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;calculationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;documentationToolStripMenuItem.Name" xml:space="preserve">
     <value>documentationToolStripMenuItem</value>
   </data>
@@ -841,10 +853,10 @@
   <data name="&gt;&gt;saveFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;calculationToolStripMenuItem.Name" xml:space="preserve">
-    <value>calculationToolStripMenuItem</value>
+  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
+    <value>exitToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;calculationToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

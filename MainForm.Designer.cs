@@ -49,6 +49,7 @@
             redoToolStripMenuItem = new ToolStripMenuItem();
             historyToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
+            calculationToolStripMenuItem = new ToolStripMenuItem();
             documentationToolStripMenuItem = new ToolStripMenuItem();
             leftPanelLayout = new Panel();
             lblSize = new Label();
@@ -60,7 +61,7 @@
             btnSquare = new Button();
             label2 = new Label();
             saveFileDialog1 = new SaveFileDialog();
-            calculationToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
             upperPanelLayout.SuspendLayout();
             menuStrip1.SuspendLayout();
             leftPanelLayout.SuspendLayout();
@@ -147,7 +148,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveAsToolStripMenuItem, openToolStripMenuItem, exportToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveAsToolStripMenuItem, openToolStripMenuItem, exportToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
@@ -210,6 +211,12 @@
             helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { calculationToolStripMenuItem, documentationToolStripMenuItem });
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // calculationToolStripMenuItem
+            // 
+            calculationToolStripMenuItem.Name = "calculationToolStripMenuItem";
+            resources.ApplyResources(calculationToolStripMenuItem, "calculationToolStripMenuItem");
+            calculationToolStripMenuItem.Click += calculationToolStripMenuItem_Click;
             // 
             // documentationToolStripMenuItem
             // 
@@ -319,11 +326,11 @@
             resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
             // 
-            // calculationToolStripMenuItem
+            // exitToolStripMenuItem
             // 
-            calculationToolStripMenuItem.Name = "calculationToolStripMenuItem";
-            resources.ApplyResources(calculationToolStripMenuItem, "calculationToolStripMenuItem");
-            calculationToolStripMenuItem.Click += calculationToolStripMenuItem_Click;
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(exitToolStripMenuItem, "exitToolStripMenuItem");
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -382,5 +389,6 @@
         private ToolStripMenuItem jpegToolStripMenuItem;
         private Label lblSize;
         private ToolStripMenuItem calculationToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
     }
 }

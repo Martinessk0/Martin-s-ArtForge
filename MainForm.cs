@@ -199,8 +199,26 @@ namespace FinalProject
             }
             if (e.KeyCode == Keys.H && e.Control)
             {
-                HistoryForm history = new HistoryForm(_historyListBox);
+                HistoryForm history = new HistoryForm(_manager.HistoryTextBox);
                 history.ShowDialog();
+            }
+            if (e.KeyCode == Keys.C && e.Control)
+            {
+                CalculationForm calculation = new CalculationForm(_figures);
+                calculation.ShowDialog();
+            }
+            if (e.KeyCode == Keys.D && e.Control)
+            {
+                DocumentationForm documentation = new DocumentationForm();
+                documentation.ShowDialog();
+            }
+            if (e.KeyCode == Keys.O && e.Control)
+            {
+                OpenFile();
+            }
+            if (e.KeyCode == Keys.S && e.Control && e.Shift)
+            {
+                SaveAsFile();
             }
         }
         private void mainLayout_MouseMove(object sender, MouseEventArgs e)
@@ -411,7 +429,7 @@ namespace FinalProject
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsFile()
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
@@ -432,6 +450,10 @@ namespace FinalProject
                     }
                 }
             }
+        }
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveAsFile();
         }
         private void SerializeFigures(string filename)
         {
@@ -470,7 +492,7 @@ namespace FinalProject
             return deserializedFigures;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenFile()
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
@@ -479,6 +501,7 @@ namespace FinalProject
                 {
                     try
                     {
+                        _figures.Clear();
                         _figures.AddRange(DeserializeFigures(dialog.FileName));
                         mainLayout.Invalidate();
                         MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -489,6 +512,11 @@ namespace FinalProject
                     }
                 }
             }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFile();
         }
 
         private void pngToolStripMenuItem_Click(object sender, EventArgs e)
@@ -536,6 +564,10 @@ namespace FinalProject
             }
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
 
