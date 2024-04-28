@@ -149,6 +149,11 @@ namespace FinalProject
             HistoryForm history = new HistoryForm(_manager.HistoryTextBox);
             history.ShowDialog();
         }
+        private void calculationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CalculationForm calculation = new CalculationForm(_figures);
+            calculation.ShowDialog();
+        }
         private void AddFigure(Figure figure)
         {
             ICommand draw = new DrawCommand(_figures, figure);
@@ -406,70 +411,6 @@ namespace FinalProject
             }
         }
 
-
-        //private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-        //    {
-        //        saveFileDialog.Filter = "JSON files (*.json)|*.json";
-        //        saveFileDialog.Title = "Save As";
-
-        //        if (saveFileDialog.ShowDialog() == DialogResult.OK)
-        //        {
-        //            try
-        //            {
-        //                string fileName = saveFileDialog.FileName;
-
-        //                string json = JsonConvert.SerializeObject(_figures,
-        //                    new JsonSerializerSettings
-        //                    {
-        //                        TypeNameHandling = TypeNameHandling.All,
-        //                        Formatting = Formatting.Indented
-        //                    });
-
-        //                File.WriteAllText(fileName, json);
-        //                MessageBox.Show("File saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                MessageBox.Show($"Error saving file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
-        //    {
-        //        openFileDialog.Filter = "JSON files (*.json)|*.json";
-        //        openFileDialog.Title = "Open";
-
-        //        if (openFileDialog.ShowDialog() == DialogResult.OK)
-        //        {
-        //            try
-        //            {
-        //                string fileName = openFileDialog.FileName;
-        //                string json = File.ReadAllText(fileName);
-
-        //                var loadedFigures = JsonConvert.DeserializeObject<List<Figure>>(json, new JsonSerializerSettings
-        //                {
-        //                    TypeNameHandling = TypeNameHandling.All,
-        //                    Formatting = Formatting.Indented
-        //                });
-
-        //                _figures.Clear();
-        //                _figures.AddRange(loadedFigures);
-        //                mainLayout.Invalidate();
-        //                MessageBox.Show("File loaded successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                MessageBox.Show($"Error loading file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //            }
-        //        }
-        //    }
-        //}
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
@@ -494,23 +435,37 @@ namespace FinalProject
         }
         private void SerializeFigures(string filename)
         {
-            using (FileStream stream = new FileStream(filename, FileMode.Create))
+            try
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, _figures);
+                using (FileStream stream = new FileStream(filename, FileMode.Create))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, _figures);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while saving the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private List<Figure> DeserializeFigures(string filename)
         {
             List<Figure> deserializedFigures = new List<Figure>();
-            if (File.Exists(filename))
+            try
             {
-                using (FileStream stream = new FileStream(filename, FileMode.Open))
+                if (File.Exists(filename))
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    deserializedFigures = (List<Figure>)formatter.Deserialize(stream);
+                    using (FileStream stream = new FileStream(filename, FileMode.Open))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        deserializedFigures = (List<Figure>)formatter.Deserialize(stream);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while trying to open the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return deserializedFigures;
         }
@@ -581,11 +536,6 @@ namespace FinalProject
             }
         }
 
-        private void calculationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CalculationForm calculation = new CalculationForm(_figures);
-            calculation.ShowDialog();
-        }
     }
 }
 

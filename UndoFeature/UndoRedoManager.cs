@@ -44,6 +44,7 @@
                 HistoryTextBox.Text += Environment.NewLine;
                 HistoryTextBox.Text += historyCommand;
                 HistoryTextBox.Text += Environment.NewLine;
+                HistoryTextBox.Text += Environment.NewLine;
                 _currentIndex--;
             }
         }
@@ -57,6 +58,7 @@
                 HistoryTextBox.Text += "Redo";
                 HistoryTextBox.Text += Environment.NewLine;
                 HistoryTextBox.Text += historyCommand;
+                HistoryTextBox.Text += Environment.NewLine;
                 HistoryTextBox.Text += Environment.NewLine;
                 _commands[_currentIndex].Execute();
             }
