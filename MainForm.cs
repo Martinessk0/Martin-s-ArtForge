@@ -39,16 +39,6 @@ namespace FinalProject
             _dpiX = e.Graphics.DpiX;
             _dpiY = e.Graphics.DpiY;
 
-            //if (_undoStack.Count > 0)
-            //    undoToolStripMenuItem.Enabled = true;
-            //else
-            //    undoToolStripMenuItem.Enabled = false;
-
-            //if (_redoStack.Count > 0)
-            //    redoToolStripMenuItem.Enabled = true;
-            //else
-            //    redoToolStripMenuItem.Enabled = false;
-
             foreach (Figure f in _figures)
             {
                 _drawingPen.Color = f.OutlineColor;
