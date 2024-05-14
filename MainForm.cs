@@ -20,7 +20,6 @@ namespace FinalProject
         private Point _lastMousePos;
 
         private Figure? _selectedFigure = null;
-        private ListBox _historyListBox = new ListBox();
         private Button lastSelectedButton;
 
         private bool _isMovable = false;
